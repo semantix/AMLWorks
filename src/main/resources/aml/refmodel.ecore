@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="refmodel" nsURI="http://www.omg.org/spec/AML/20150501/ReferenceModelProfile.xmi"
+    nsPrefix="refmodel">
+  <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <details key="originalName" value="ReferenceModelProfile"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Infrastructure">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Runtime">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceModel">
+    <eOperations name="_AOMARCHETYPE_HRIDInvariantRm_publisher_validity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] ARCHETYPE_HRID:Invariant:Rm_publisher_validity"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The requirement that there is a specified rmPublisher is enforced by the UML Semantic for the required tag rmPublisher."/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rmPublisher" ordered="false"
+        lowerBound="1" eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rmNamespace" ordered="false"
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rmVersion" ordered="false"
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappedDataType">
+    <eOperations name="isAMLDataType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_Abstraction.supplier->exists(s|s.oclIsKindOf(PrimitiveType) and ((s.namespace.name='XMLPrimitiveTypes') or (s.namespace.name='PrimitiveTypes')))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Abstraction"/>
+  </eClassifiers>
+</ecore:EPackage>

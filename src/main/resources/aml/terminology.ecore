@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="terminology" nsURI="http://www.omg.org/spec/AML/20150501/TerminologyProfile.xmi"
+    nsPrefix="terminology">
+  <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <details key="originalName" value="TerminologyProfile"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="IdentifiedItem">
+    <eOperations name="uniqueScopes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.id->forAll(l1 | self.id->forAll(l2 | l1.oclAsType(EnumerationLiteral).namespace = l2.oclAsType(EnumerationLiteral).namespace implies l1 = l2))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" ordered="false" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PermissibleValue" eSuperTypes="#//IdentifiedItem">
+    <eOperations name="mustBeConceptReference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="not(self.meaning.oclIsUndefined())&#xA;implies&#xA;self.meaning.stereotypedBy('ConceptReference')&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+        ordered="false" lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="meaning" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedIdentifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" ordered="false" eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifierURIPattern" ordered="false"
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Enumeration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumeratedValueDomain" eSuperTypes="#//IdentifiedItem">
+    <eOperations name="permissibleValues" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value=" self.base_Enumeration.ownedLiteral->forAll(x:EnumerationLiteral|x.stereotypedBy('PermissibleValue'))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="bindingIsValueSetOrDefinition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="not(self.valueSetBinding.oclIsUndefined())&#xA;implies(&#xA;self.valueSetBinding.stereotypedBy('ValueSetReference')&#xA;or self.valueSetBinding.stereotypedBy('ValueSetDefinitionReference')&#xA;)&#xA;&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Enumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueSetBinding" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceReference" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" ordered="false" eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+        ordered="false" lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CodeSystemReference" eSuperTypes="#//ResourceReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CodeSystemVersionReference" eSuperTypes="#//ResourceReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="codeSystem" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptReference" eSuperTypes="#//ResourceReference">
+    <eOperations name="mustBeScopedIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_EnumerationLiteral.namespace.stereotypedBy('ScopedIdentifier')"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="designation" ordered="false"
+        upperBound="-1" eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueSetDefinitionReference" eSuperTypes="#//ResourceReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueSet" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueSetReference" eSuperTypes="#//ResourceReference">
+    <eOperations name="definition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.valueSetDefinition->forAll(d|d.stereotypedBy('ValueSetDefinitionReference'))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueSetDefinition" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArchetypeType">
+    <eLiterals name="archetype"/>
+    <eLiterals name="template" value="1"/>
+    <eLiterals name="template_overlay" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchetypeTerm" eSuperTypes="#//PermissibleValue">
+    <eOperations name="_AOMVTLClanguageconsistency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTLC- language consistency"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_EnumerationLiteral.namespace.oclAsType(Enumeration).namespace.oclAsType(Package).ownedType&#xA;&#x9;->select(t|t.stereotypedBy('ResourceTranslation')).oclAsType(Enumeration)&#xA;&#x9;->forAll(sibling|sibling.ownedLiteral->exists(ol|ol.appliedStereotype('IdEntry').oclAsType(IdEntry).ref=self.base_EnumerationLiteral))             &#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTVSIDvaluesetiddefined" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTVSID- value-set id defined"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This [AOM] Validity Rule is definitional in AML.  &#xA;The definition of the identifying code of a value set is an Archetype Term which has a non-empty value for the value_set_members tag.&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTVSUQvaluesetmembersunique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTVSUQ- value-set members unique"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.value_set_members->forAll(member|member.namespace=self.base_EnumerationLiteral.namespace)&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTVSMDvaluesetmembersdefined" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTVSMD- value-set members defined"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.value_set_members->forAll(member|member.namespace=self.base_EnumerationLiteral.namespace)&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMARCHETYPE_TERMInvariantcode_valid_code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] ARCHETYPE_TERM:Invariant:code_valid_code"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="not(self.base_EnumerationLiteral.name.oclIsUndefined())&#xA;and(self.base_EnumerationLiteral.name&lt;>'')"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVALUE_SETInvariantId_valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VALUE_SET:Invariant:Id_valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="In AML, the [AOM] Constraint is definitional; the ArchetypeTerm name is an Identifier Definition id as well as the Value Set definition."/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVALUE_SETInvariantMembers_valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VALUE_SET:Invariant:Members_valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.value_set_members->forAll(m|m.namespace=self.base_EnumerationLiteral.namespace)&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMARCHETYPE_TERMINOLOGYInvariantterm_bindings_validity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] ARCHETYPE_TERMINOLOGY:Invariant:term_bindings_validity"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.term_bindings&#xA;->forAll(binding|&#xA;&#x9;binding.stereotypedBy('ConceptReference') &#xA;&#x9;and (binding.namespace.namespace.namespace=self.base_EnumerationLiteral.namespace.namespace.namespace)&#xA;)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVETDFexternaltermvalidity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VETDF- external term validity"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.term_bindings->forAll(b|b.namespace.namespace.name='term_bindings')&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTCBKterminologyconstraintbindingkeyvalid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTCBK- terminology constraint binding key valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.term_bindings->forAll(b|b.namespace.namespace.name='term_bindings')"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTSDspecialisationlevelofcodes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTSD- specialisation level of codes"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Term or constraint code defined in archetype terminology must be of the same or a less specialized level then the specialization level of the Archetype. "/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="_AOMVTTBKterminologytermbindingkeyvalid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] VTTBK- terminology term binding key valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.term_bindings->forAll(b|b.namespace.namespace.name='term_bindings')&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value_set_members" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term_bindings" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TermResourceTranslation">
+    <eOperations name="translationEntries" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_Enumeration.ownedLiteral->forAll(ol|ol.stereotypedBy('Entry'))&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Enumeration" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Enumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="language" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IdEntry" eSuperTypes="#//Entry">
+    <eOperations name="_AOMARCHETYPE_TERMInvariantdescription_valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] ARCHETYPE_TERM:Invariant:description_valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_EnumerationLiteral.ownedComment._'body'->exists(b|not(b.oclIsUndefined()))&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" ordered="false" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+        ordered="false" lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry">
+    <eOperations name="_AOMARCHETYPE_TERMInvarianttext_valid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="[AOM] ARCHETYPE_TERM:Invariant:text_valid"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The [AOM] Invariant is enforced by the UML semantic for the required text tag.&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" ordered="false" lowerBound="1"
+        eType="ecore:EDataType ../../org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//NamedElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DescribedIdentifier" eSuperTypes="#//ScopedIdentifier">
+    <eOperations name="membersMustBeConceptReference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_Enumeration.ownedLiteral->forAll(ol|ol.stereotypedBy('ConceptReference'))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="definingCodeSystem" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="not(self.definingCodeSystem.oclIsUndefined())&#xA;implies(&#xA;self.definingCodeSystem.stereotypedBy('CodeSystemReference')&#xA;or self.definingCodeSystem.stereotypedBy('CodeSystemVersionReference')&#xA;)&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definingCodeSystem" ordered="false"
+        eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//EnumerationLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="about">
+    <eOperations name="isConceptReference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="self.base_Abstraction.supplier->select(c|c.stereotypedBy('ConceptReference'))->size()=1"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.uml2.uml/model/UML.ecore#//Abstraction"/>
+  </eClassifiers>
+</ecore:EPackage>

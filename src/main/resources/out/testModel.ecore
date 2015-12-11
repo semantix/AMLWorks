@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="AML_RM">
+  <eSubpackages name="CIMI Reference Model">
+    <eSubpackages name="Core">
+      <eClassifiers xsi:type="ecore:EClass" name="ARCHETYPED">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="archetype_id" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="rm_version" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"
+            changeable="false" defaultValueLiteral="3.0.5"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ELEMENT" eSuperTypes="#//CIMI%20Reference%20Model/Core/ITEM">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="null_flavor" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ITEM" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Core/LOCATABLE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ITEM_GROUP" eSuperTypes="#//CIMI%20Reference%20Model/Core/ITEM">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="item" ordered="false"
+            lowerBound="1" upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/ITEM"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="participation" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/PARTICIPATION"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LINK">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="meaning" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Core/LOCATABLE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LOCATABLE" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="archetype_node_id"
+            ordered="false" lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="archetype_details"
+            ordered="false" eType="#//CIMI%20Reference%20Model/Core/ARCHETYPED" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/LINK" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTICIPATION" eSuperTypes="#//CIMI%20Reference%20Model/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="party" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Party/PARTY"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Data Value Types">
+      <eClassifiers xsi:type="ecore:EClass" name="AMOUNT" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/QUANTIFIED">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="accuracy" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/Real"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="accuracy_is_percent"
+            ordered="false" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CODED_TEXT" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/TEXT">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="term" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="terminology_id" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="terminology_version"
+            ordered="false" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/URI"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="COUNT" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DATA_VALUE" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DATE" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATE_TIME"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DATE_TIME" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/QUANTIFIED">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DURATION" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/QUANTITY">
+        <eOperations name="is_strictly_comparable_to">
+          <eParameters name="other" ordered="false" lowerBound="1"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration_text" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EHR_URI" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/URI_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ENCAPSULATED" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IDENTIFIER" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="issuer" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="INTERVAL_VALUE" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower_included" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower_unbounded" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper_included" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper_unbounded" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lower&lt;T>" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/ORDERED_VALUE"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="upper&lt;T>" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/ORDERED_VALUE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MULTIMEDIA" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/ENCAPSULATED">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="alternate_text" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/Byte"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="data" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Byte"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="media_type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/URI_VALUE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ORDERED_VALUE" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ORDINAL" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/ORDERED_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Real"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARSABLE" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/ENCAPSULATED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="formalism" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PLAIN_TEXT" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/TEXT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="language" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PROPORTION" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="denominator" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Real"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="numerator" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Real"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="QUANTIFIED" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/ORDERED_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value_status" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="QUANTITY" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Primitive%20Types/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="units" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Real"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="QuantifiedValueStatusEnum">
+        <eLiterals name="="/>
+        <eLiterals name="&lt;"/>
+        <eLiterals name=">"/>
+        <eLiterals name="&lt;="/>
+        <eLiterals name=">="/>
+        <eLiterals name="~"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TERM_MAPPING">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="match" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Character"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="purpose" ordered="false"
+            eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TEXT" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/TERM_MAPPING"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TIME" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATE_TIME"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="TermMappingMatchEnum">
+        <eLiterals name=">"/>
+        <eLiterals name="="/>
+        <eLiterals name="&lt;"/>
+        <eLiterals name="?"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="URI_VALUE" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/URI"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="YESNO" eSuperTypes="#//CIMI%20Reference%20Model/Data%20Value%20Types/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Primitive%20Types/Boolean"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Party">
+      <eClassifiers xsi:type="ecore:EClass" name="ACTOR" eSuperTypes="#//CIMI%20Reference%20Model/Party/PARTY">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="role" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Party/ROLE" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTY" abstract="true" eSuperTypes="#//CIMI%20Reference%20Model/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Party/PARTY_RELATIONSHIP"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTY_RELATIONSHIP" eSuperTypes="#//CIMI%20Reference%20Model/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMI%20Reference%20Model/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Party/PARTY"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ROLE" eSuperTypes="#//CIMI%20Reference%20Model/Party/PARTY">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMI%20Reference%20Model/Data%20Value%20Types/CODED_TEXT"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Primitive Types">
+      <eClassifiers xsi:type="ecore:EClass" name="Any"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Array">
+        <eTypeParameters name="T">
+          <eBounds eClassifier="#//CIMI%20Reference%20Model/Primitive%20Types/Any"/>
+        </eTypeParameters>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="List"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Byte"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Character"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Real"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="String"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="URI"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

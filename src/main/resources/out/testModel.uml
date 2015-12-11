@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_vC4pcJ-aEeWoH_wpiSUjtQ" name="AML_RM">
+  <eSubpackages xmi:id="_vC6eoJ-aEeWoH_wpiSUjtQ" name="CIMI Reference Model">
+    <eSubpackages xmi:id="_vC6eoZ-aEeWoH_wpiSUjtQ" name="Core">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC6eop-aEeWoH_wpiSUjtQ" name="ARCHETYPED">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC6eo5-aEeWoH_wpiSUjtQ" name="archetype_id" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC6epZ-aEeWoH_wpiSUjtQ" name="rm_version" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ" changeable="false" defaultValueLiteral="3.0.5"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC6ep5-aEeWoH_wpiSUjtQ" name="ELEMENT" eSuperTypes="_vC6erZ-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6eqJ-aEeWoH_wpiSUjtQ" name="null_flavor" ordered="false" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6eqp-aEeWoH_wpiSUjtQ" name="value" ordered="false" eType="_vC7F2Z-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC6erZ-aEeWoH_wpiSUjtQ" name="ITEM" abstract="true" eSuperTypes="_vC7FsZ-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC6er5-aEeWoH_wpiSUjtQ" name="ITEM_GROUP" eSuperTypes="_vC6erZ-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6esJ-aEeWoH_wpiSUjtQ" name="item" ordered="false" lowerBound="1" upperBound="-1" eType="_vC6erZ-aEeWoH_wpiSUjtQ" containment="true"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6esp-aEeWoH_wpiSUjtQ" name="participation" ordered="false" upperBound="-1" eType="_vC7Fup-aEeWoH_wpiSUjtQ" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC6etZ-aEeWoH_wpiSUjtQ" name="LINK">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6etp-aEeWoH_wpiSUjtQ" name="details" ordered="false" upperBound="-1" eType="_vC6erZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6euJ-aEeWoH_wpiSUjtQ" name="meaning" ordered="false" lowerBound="1" eType="_vC8T2p-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC6eup-aEeWoH_wpiSUjtQ" name="target" ordered="false" lowerBound="1" eType="_vC7FsZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7FsZ-aEeWoH_wpiSUjtQ" name="LOCATABLE" abstract="true">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7Fsp-aEeWoH_wpiSUjtQ" name="archetype_node_id" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7FtJ-aEeWoH_wpiSUjtQ" name="name" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7Ftp-aEeWoH_wpiSUjtQ" name="archetype_details" ordered="false" eType="_vC6eop-aEeWoH_wpiSUjtQ" containment="true"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7FuJ-aEeWoH_wpiSUjtQ" name="link" ordered="false" upperBound="-1" eType="_vC6etZ-aEeWoH_wpiSUjtQ" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7Fup-aEeWoH_wpiSUjtQ" name="PARTICIPATION" eSuperTypes="_vC7FsZ-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7Fu5-aEeWoH_wpiSUjtQ" name="details" ordered="false" upperBound="-1" eType="_vC6erZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7FvZ-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7Fv5-aEeWoH_wpiSUjtQ" name="party" ordered="false" lowerBound="1" eType="_vC8T9p-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages xmi:id="_vC7Fwp-aEeWoH_wpiSUjtQ" name="Data Value Types">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7Fw5-aEeWoH_wpiSUjtQ" name="AMOUNT" abstract="true" eSuperTypes="_vC7s95-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7FxJ-aEeWoH_wpiSUjtQ" name="accuracy" ordered="false" eType="_vC866J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7Fxp-aEeWoH_wpiSUjtQ" name="accuracy_is_percent" ordered="false" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7FyZ-aEeWoH_wpiSUjtQ" name="CODED_TEXT" eSuperTypes="_vC8T2p-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7Fyp-aEeWoH_wpiSUjtQ" name="code" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7FzJ-aEeWoH_wpiSUjtQ" name="term" ordered="false" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7Fzp-aEeWoH_wpiSUjtQ" name="terminology_id" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F0J-aEeWoH_wpiSUjtQ" name="terminology_version" ordered="false" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F0p-aEeWoH_wpiSUjtQ" name="uri" ordered="false" eType="_vC866p-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F1Z-aEeWoH_wpiSUjtQ" name="COUNT" eSuperTypes="_vC7Fw5-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F1p-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC8655-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F2Z-aEeWoH_wpiSUjtQ" name="DATA_VALUE" abstract="true"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F2p-aEeWoH_wpiSUjtQ" name="DATE" eSuperTypes="_vC7F3J-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F3J-aEeWoH_wpiSUjtQ" name="DATE_TIME" eSuperTypes="_vC7s95-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F3Z-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F4J-aEeWoH_wpiSUjtQ" name="DURATION" eSuperTypes="_vC7s-5-aEeWoH_wpiSUjtQ">
+        <eOperations xmi:id="_vC7F4Z-aEeWoH_wpiSUjtQ" name="is_strictly_comparable_to">
+          <eParameters xmi:id="_vC7F4p-aEeWoH_wpiSUjtQ" name="other" ordered="false" lowerBound="1"/>
+        </eOperations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F45-aEeWoH_wpiSUjtQ" name="duration_text" ordered="false" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F5p-aEeWoH_wpiSUjtQ" name="EHR_URI" eSuperTypes="_vC8T55-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F6J-aEeWoH_wpiSUjtQ" name="ENCAPSULATED" abstract="true" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7F6p-aEeWoH_wpiSUjtQ" name="IDENTIFIER" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F65-aEeWoH_wpiSUjtQ" name="id" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7F7Z-aEeWoH_wpiSUjtQ" name="issuer" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7swJ-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7sw5-aEeWoH_wpiSUjtQ" name="INTERVAL_VALUE" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7sxJ-aEeWoH_wpiSUjtQ" name="lower_included" ordered="false" lowerBound="1" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7sxp-aEeWoH_wpiSUjtQ" name="lower_unbounded" ordered="false" lowerBound="1" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7syJ-aEeWoH_wpiSUjtQ" name="upper_included" ordered="false" lowerBound="1" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7syp-aEeWoH_wpiSUjtQ" name="upper_unbounded" ordered="false" lowerBound="1" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7szJ-aEeWoH_wpiSUjtQ" name="lower&lt;T>" ordered="false" eType="_vC7s25-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7szp-aEeWoH_wpiSUjtQ" name="upper&lt;T>" ordered="false" eType="_vC7s25-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s0Z-aEeWoH_wpiSUjtQ" name="MULTIMEDIA" eSuperTypes="_vC7F6J-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s0p-aEeWoH_wpiSUjtQ" name="alternate_text" ordered="false" eType="_vC865Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s1J-aEeWoH_wpiSUjtQ" name="data" ordered="false" upperBound="-1" eType="_vC865Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s1p-aEeWoH_wpiSUjtQ" name="media_type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s2J-aEeWoH_wpiSUjtQ" name="uri" ordered="false" eType="_vC8T55-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s25-aEeWoH_wpiSUjtQ" name="ORDERED_VALUE" abstract="true" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s3Z-aEeWoH_wpiSUjtQ" name="ORDINAL" eSuperTypes="_vC7s25-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s3p-aEeWoH_wpiSUjtQ" name="symbol" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s4J-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866J-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s45-aEeWoH_wpiSUjtQ" name="PARSABLE" eSuperTypes="_vC7F6J-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s5J-aEeWoH_wpiSUjtQ" name="formalism" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s5p-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s6Z-aEeWoH_wpiSUjtQ" name="PLAIN_TEXT" eSuperTypes="_vC8T2p-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s6p-aEeWoH_wpiSUjtQ" name="language" ordered="false" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s7Z-aEeWoH_wpiSUjtQ" name="PROPORTION" eSuperTypes="_vC7Fw5-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s7p-aEeWoH_wpiSUjtQ" name="denominator" ordered="false" lowerBound="1" eType="_vC866J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s8J-aEeWoH_wpiSUjtQ" name="numerator" ordered="false" lowerBound="1" eType="_vC866J-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s8p-aEeWoH_wpiSUjtQ" name="precision" ordered="false" eType="_vC8655-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s9J-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s95-aEeWoH_wpiSUjtQ" name="QUANTIFIED" abstract="true" eSuperTypes="_vC7s25-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s-J-aEeWoH_wpiSUjtQ" name="value_status" ordered="false" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC7s-5-aEeWoH_wpiSUjtQ" name="QUANTITY" eSuperTypes="_vC7Fw5-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7s_J-aEeWoH_wpiSUjtQ" name="precision" ordered="false" eType="_vC8655-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC7s_p-aEeWoH_wpiSUjtQ" name="units" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC7tAJ-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866J-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_vC7tA5-aEeWoH_wpiSUjtQ" name="QuantifiedValueStatusEnum">
+        <eLiterals xmi:id="_vC7tBJ-aEeWoH_wpiSUjtQ" name="="/>
+        <eLiterals xmi:id="_vC7tBZ-aEeWoH_wpiSUjtQ" name="&lt;"/>
+        <eLiterals xmi:id="_vC7tBp-aEeWoH_wpiSUjtQ" name=">"/>
+        <eLiterals xmi:id="_vC8T0J-aEeWoH_wpiSUjtQ" name="&lt;="/>
+        <eLiterals xmi:id="_vC8T0Z-aEeWoH_wpiSUjtQ" name=">="/>
+        <eLiterals xmi:id="_vC8T0p-aEeWoH_wpiSUjtQ" name="~"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T05-aEeWoH_wpiSUjtQ" name="TERM_MAPPING">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC8T1J-aEeWoH_wpiSUjtQ" name="match" ordered="false" lowerBound="1" eType="_vC865p-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T1p-aEeWoH_wpiSUjtQ" name="purpose" ordered="false" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T2J-aEeWoH_wpiSUjtQ" name="target" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T2p-aEeWoH_wpiSUjtQ" name="TEXT" abstract="true" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC8T25-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866Z-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T3Z-aEeWoH_wpiSUjtQ" name="mapping" ordered="false" upperBound="-1" eType="_vC8T05-aEeWoH_wpiSUjtQ" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T4J-aEeWoH_wpiSUjtQ" name="TIME" eSuperTypes="_vC7F3J-aEeWoH_wpiSUjtQ"/>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_vC8T4p-aEeWoH_wpiSUjtQ" name="TermMappingMatchEnum">
+        <eLiterals xmi:id="_vC8T45-aEeWoH_wpiSUjtQ" name=">"/>
+        <eLiterals xmi:id="_vC8T5J-aEeWoH_wpiSUjtQ" name="="/>
+        <eLiterals xmi:id="_vC8T5Z-aEeWoH_wpiSUjtQ" name="&lt;"/>
+        <eLiterals xmi:id="_vC8T5p-aEeWoH_wpiSUjtQ" name="?"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T55-aEeWoH_wpiSUjtQ" name="URI_VALUE" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC8T6J-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC866p-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T65-aEeWoH_wpiSUjtQ" name="YESNO" eSuperTypes="_vC7F2Z-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vC8T7J-aEeWoH_wpiSUjtQ" name="value" ordered="false" lowerBound="1" eType="_vC865J-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages xmi:id="_vC8T75-aEeWoH_wpiSUjtQ" name="Party">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T8J-aEeWoH_wpiSUjtQ" name="ACTOR" eSuperTypes="_vC8T9p-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T8Z-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T85-aEeWoH_wpiSUjtQ" name="role" ordered="false" upperBound="-1" eType="_vC8UBJ-aEeWoH_wpiSUjtQ" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T9p-aEeWoH_wpiSUjtQ" name="PARTY" abstract="true" eSuperTypes="_vC7FsZ-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T95-aEeWoH_wpiSUjtQ" name="details" ordered="false" upperBound="-1" eType="_vC6erZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T-Z-aEeWoH_wpiSUjtQ" name="relationship" ordered="false" upperBound="-1" eType="_vC8T_J-aEeWoH_wpiSUjtQ" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8T_J-aEeWoH_wpiSUjtQ" name="PARTY_RELATIONSHIP" eSuperTypes="_vC7FsZ-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T_Z-aEeWoH_wpiSUjtQ" name="details" ordered="false" upperBound="-1" eType="_vC6erZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8T_5-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8UAZ-aEeWoH_wpiSUjtQ" name="target" ordered="false" lowerBound="1" eType="_vC8T9p-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8UBJ-aEeWoH_wpiSUjtQ" name="ROLE" eSuperTypes="_vC8T9p-aEeWoH_wpiSUjtQ">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vC8UBZ-aEeWoH_wpiSUjtQ" name="type" ordered="false" lowerBound="1" eType="_vC7FyZ-aEeWoH_wpiSUjtQ"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages xmi:id="_vC8UCJ-aEeWoH_wpiSUjtQ" name="Primitive Types">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8UCZ-aEeWoH_wpiSUjtQ" name="Any"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC864J-aEeWoH_wpiSUjtQ" name="Array">
+        <eTypeParameters xmi:id="_vC864Z-aEeWoH_wpiSUjtQ" name="T">
+          <eBounds xmi:id="_vC864p-aEeWoH_wpiSUjtQ" eClassifier="_vC8UCZ-aEeWoH_wpiSUjtQ"/>
+        </eTypeParameters>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vC8645-aEeWoH_wpiSUjtQ" name="List"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC865J-aEeWoH_wpiSUjtQ" name="Boolean"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC865Z-aEeWoH_wpiSUjtQ" name="Byte"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC865p-aEeWoH_wpiSUjtQ" name="Character"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC8655-aEeWoH_wpiSUjtQ" name="Integer"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC866J-aEeWoH_wpiSUjtQ" name="Real"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC866Z-aEeWoH_wpiSUjtQ" name="String"/>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_vC866p-aEeWoH_wpiSUjtQ" name="URI"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
