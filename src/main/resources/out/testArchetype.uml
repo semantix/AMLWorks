@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_wOnt0KCMEeWnDNgn8ZfWqA" name="epo2">
+  <packagedElement xmi:type="uml:Package" xmi:id="_wOpjAKCMEeWnDNgn8ZfWqA" name="bar">
+    <packagedElement xmi:type="uml:Class" xmi:id="_wOpjAaCMEeWnDNgn8ZfWqA" name="TESTDEEPAK">
+      <ownedAttribute xmi:id="_wOpjAqCMEeWnDNgn8ZfWqA" name="nameOfme" type="_wOpjBaCMEeWnDNgn8ZfWqA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wOpjA6CMEeWnDNgn8ZfWqA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wOpjBKCMEeWnDNgn8ZfWqA"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_wOpjBaCMEeWnDNgn8ZfWqA" name="int"/>
+  </packagedElement>
+</uml:Model>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="AML_RM" nsURI="http:///AML_RM.ecore" nsPrefix="AML_RM">
+  <eSubpackages name="CIMIReferenceModel" nsURI="http:///AML_RM/CIMIReferenceModel.ecore"
+      nsPrefix="AML_RM.CIMIReferenceModel">
+    <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <details key="originalName" value="CIMI Reference Model"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="units constrained to units of time"/>
+    </eAnnotations>
+    <eSubpackages name="Core" nsURI="http:///AML_RM/CIMIReferenceModel/Core.ecore"
+        nsPrefix="AML_RM.CIMIReferenceModel.Core">
+      <eClassifiers xsi:type="ecore:EClass" name="ARCHETYPED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="archetype_id" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rm_version" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" changeable="false"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ELEMENT" eSuperTypes="#//CIMIReferenceModel/Core/ITEM">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="null_flavor" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ITEM" abstract="true" eSuperTypes="#//CIMIReferenceModel/Core/LOCATABLE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="LOCATABLE" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="archetype_node_id"
+            ordered="false" lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="name" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="archetype_details"
+            ordered="false" eType="#//CIMIReferenceModel/Core/ARCHETYPED" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/LINK" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LINK">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="meaning" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/Core/LOCATABLE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ITEM_GROUP" eSuperTypes="#//CIMIReferenceModel/Core/ITEM">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="item" ordered="false"
+            lowerBound="1" upperBound="-1" eType="#//CIMIReferenceModel/Core/ITEM"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="participation" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/PARTICIPATION" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTICIPATION" eSuperTypes="#//CIMIReferenceModel/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="party" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/Party/PARTY"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="PrimitiveTypes" nsURI="http:///AML_RM/CIMIReferenceModel/PrimitiveTypes.ecore"
+        nsPrefix="AML_RM.CIMIReferenceModel.PrimitiveTypes">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="Primitive Types"/>
+      </eAnnotations>
+      <eClassifiers xsi:type="ecore:EClass" name="Any"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Array"/>
+      <eClassifiers xsi:type="ecore:EClass" name="List">
+        <eTypeParameters name="T"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Boolean"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Byte"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Character"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Integer"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Real"/>
+      <eClassifiers xsi:type="ecore:EClass" name="URI"/>
+      <eClassifiers xsi:type="ecore:EClass" name="String"/>
+    </eSubpackages>
+    <eSubpackages name="DataValueTypes" nsURI="http:///AML_RM/CIMIReferenceModel/DataValueTypes.ecore"
+        nsPrefix="AML_RM.CIMIReferenceModel.DataValueTypes">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="Data Value Types"/>
+      </eAnnotations>
+      <eClassifiers xsi:type="ecore:EClass" name="AMOUNT" abstract="true" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/QUANTIFIED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="accuracy" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/Real" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="accuracy_is_percent"
+            ordered="false" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="QUANTIFIED" abstract="true" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/ORDERED_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value_status" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ORDERED_VALUE" abstract="true" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DATA_VALUE" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CODED_TEXT" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/TEXT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="code" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="term" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="terminology_id" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="terminology_version"
+            ordered="false" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/URI" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="COUNT" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Integer" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DATE" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATE_TIME"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DATE_TIME" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/QUANTIFIED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DURATION" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/QUANTITY">
+        <eOperations name="is_strictly_comparable_to" ordered="false" lowerBound="1">
+          <eParameters name="other" ordered="false" lowerBound="1"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="duration_text" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="QUANTITY" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="precision" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/Integer" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="units" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Real" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EHR_URI" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/URI_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="URI_VALUE" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/URI" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ENCAPSULATED" abstract="true" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IDENTIFIER" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="id" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="issuer" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="INTERVAL_VALUE" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lower_included" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lower_unbounded" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="upper_included" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="upper_unbounded" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="lowerT" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/ORDERED_VALUE">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="lower&lt;T>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="upperT" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/ORDERED_VALUE">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="upper&lt;T>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MULTIMEDIA" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/ENCAPSULATED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="alternate_text" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/Byte" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="data" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/PrimitiveTypes/Byte" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="media_type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="uri" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/URI_VALUE"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ORDINAL" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/ORDERED_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Real" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARSABLE" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/ENCAPSULATED">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="formalism" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PLAIN_TEXT" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/TEXT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="language" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PROPORTION" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/AMOUNT">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="denominator" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Real" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="numerator" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Real" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="precision" ordered="false"
+            eType="#//CIMIReferenceModel/PrimitiveTypes/Integer" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="QuantifiedValueStatusEnum">
+        <eLiterals name="_">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="="/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="1">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="&lt;"/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="2">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value=">"/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="3">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="&lt;="/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="4">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value=">="/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="5">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="~"/>
+          </eAnnotations>
+        </eLiterals>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TERM_MAPPING">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="match" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Character"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="purpose" ordered="false"
+            eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TIME" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATE_TIME"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="TermMappingMatchEnum">
+        <eLiterals name="_">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value=">"/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="1">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="="/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="2">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="&lt;"/>
+          </eAnnotations>
+        </eLiterals>
+        <eLiterals name="_" value="3">
+          <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details key="originalName" value="?"/>
+          </eAnnotations>
+        </eLiterals>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="YESNO" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/Boolean" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TEXT" abstract="true" eSuperTypes="#//CIMIReferenceModel/DataValueTypes/DATA_VALUE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/PrimitiveTypes/String" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/DataValueTypes/TERM_MAPPING"
+            containment="true"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Party" nsURI="http:///AML_RM/CIMIReferenceModel/Party.ecore"
+        nsPrefix="AML_RM.CIMIReferenceModel.Party">
+      <eClassifiers xsi:type="ecore:EClass" name="ACTOR" eSuperTypes="#//CIMIReferenceModel/Party/PARTY">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="role" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Party/ROLE" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ROLE" eSuperTypes="#//CIMIReferenceModel/Party/PARTY">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTY_RELATIONSHIP" eSuperTypes="#//CIMIReferenceModel/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/DataValueTypes/CODED_TEXT"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+            lowerBound="1" eType="#//CIMIReferenceModel/Party/PARTY"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PARTY" abstract="true" eSuperTypes="#//CIMIReferenceModel/Core/LOCATABLE">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="details" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Core/ITEM"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" ordered="false"
+            upperBound="-1" eType="#//CIMIReferenceModel/Party/PARTY_RELATIONSHIP"
+            containment="true"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

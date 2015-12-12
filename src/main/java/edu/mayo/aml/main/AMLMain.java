@@ -68,7 +68,7 @@ public class AMLMain
 //        String tbpName = "aml/terminology.ecore";
 //        String cpName = "aml/constraint.ecore";
 
-        String rmName = "rm/CIMI_RM_v3.0.5.xmi";
+        String rmName = "rm/CIMI_RM.UML";
         String rmpName = "aml/ReferenceModelProfile.uml";
         String tbpName = "aml/TerminologyProfile.uml";
         String cpName = "aml/ConstraintProfile.uml";

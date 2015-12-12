@@ -9,6 +9,8 @@ import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -17,13 +19,15 @@ import java.io.IOException;
  */
 public class UMLModelHelper
 {
+    final static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(UMLModelHelper.class);
+
     public static Model createModel(String name)
     {
         Model model = UMLFactory.eINSTANCE.createModel();
 
         model.setName(name);
 
-        System.out.println("Model '" + model.getQualifiedName() + "' created.");
+        logger.info("Model '" + model.getQualifiedName() + "' created.");
 
         return model;
     }
@@ -39,16 +43,52 @@ public class UMLModelHelper
 
          Package pkg = nestingPackage.createNestedPackage(name);
 
-         System.out.println("Package '" + pkg.getQualifiedName() + "' created.");
+         logger.info("Package '" + pkg.getQualifiedName() + "' created.");
 
          return pkg;
+    }
+
+    public static Profile createProfile(Package nestingPackage, String name)
+    {
+        Profile profile = null;
+
+        if (nestingPackage == null)
+        {
+            profile = UMLFactory.eINSTANCE.createProfile();
+            profile.setName(name);
+            return profile;
+        }
+
+        profile.setNestingPackage(nestingPackage);
+
+        logger.info("Profile '" + profile.getQualifiedName() + "' created.");
+
+        return profile;
+    }
+
+    public static Stereotype createStereotype(Profile nestingProfile, String name)
+    {
+        Stereotype stereotype = null;
+
+        if (nestingProfile == null)
+        {
+            stereotype = UMLFactory.eINSTANCE.createStereotype();
+            stereotype.setName(name);
+            return stereotype;
+        }
+
+        //stereotype.getsetNestingPackage(nestingPackage);
+
+        logger.info("Stereotype '" + stereotype.getQualifiedName() + "' created.");
+
+        return stereotype;
     }
 
      public static PrimitiveType createPrimitiveType(Package pkg, String name)
      {
          PrimitiveType primitiveType = (PrimitiveType) pkg.createOwnedPrimitiveType(name);
-         System.out.println("Primitive type '" + primitiveType.getQualifiedName()
-             + "' created.");
+         logger.info("Primitive type '" + primitiveType.getQualifiedName()
+                 + "' created.");
 
         return primitiveType;
      }
@@ -57,7 +97,7 @@ public class UMLModelHelper
     {
         Enumeration enumeration = (Enumeration) pkg.createOwnedEnumeration(name);
 
-        System.out.println("Enumeration '" + enumeration.getQualifiedName() + "' created.");
+        logger.info("Enumeration '" + enumeration.getQualifiedName() + "' created.");
 
         return enumeration;
     }
@@ -67,8 +107,8 @@ public class UMLModelHelper
     {
         EnumerationLiteral enumerationLiteral = enumeration.createOwnedLiteral(name);
 
-        System.out.println("Enumeration literal '" + enumerationLiteral.getQualifiedName()
-                 + "' created.");
+        logger.info("Enumeration literal '" + enumerationLiteral.getQualifiedName()
+                + "' created.");
 
         return enumerationLiteral;
     }
@@ -77,7 +117,7 @@ public class UMLModelHelper
     {
         Class cls = pkg.createOwnedClass(name, isAbstract);
 
-        System.out.println("Class '" + cls.getQualifiedName() + "' created.");
+        logger.info("Class '" + cls.getQualifiedName() + "' created.");
 
         return cls;
     }
@@ -88,8 +128,8 @@ public class UMLModelHelper
         Generalization generalization = specificClassifier
          .createGeneralization(generalClassifier);
 
-        System.out.println("Generalization " + specificClassifier.getQualifiedName() + " ->> "
-                 + generalClassifier.getQualifiedName() + " created.");
+        logger.info("Generalization " + specificClassifier.getQualifiedName() + " ->> "
+                + generalClassifier.getQualifiedName() + " created.");
 
         return generalization;
     }
@@ -120,7 +160,7 @@ public class UMLModelHelper
 
          sb.append(" created.");
 
-        System.out.println(sb.toString());
+         logger.info(sb.toString());
 
          return attribute;
     }
@@ -192,7 +232,7 @@ public class UMLModelHelper
 
          sb.append(" created.");
 
-        System.out.println(sb.toString());
+        logger.info(sb.toString());
 
          return association;
     }
@@ -209,9 +249,9 @@ public class UMLModelHelper
 
         try {
             resource.save(null);
-            System.out.println("saved to " + uri);
+            logger.info("saved to " + uri);
         } catch (IOException e) {
-            System.out.println("failed to write " + uri);
+            logger.error("failed to write " + uri);
         }
     }
 
