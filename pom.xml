@@ -40,6 +40,10 @@
         </developer>
     </developers>
 
+    <properties>
+        <eclipse.plugins.dir>${user.home}/my_installations/eclipse_installer/Eclipse Installer.app/Contents/Eclipse/plugins</eclipse.plugins.dir>
+        <eclipse.p2.dir>${user.home}/.p2/pool/plugins</eclipse.p2.dir>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -70,7 +74,7 @@
         </dependency>
 
         <!-- EMF Libraries from Mayo's Informatics Maven (3rd Party) Repositories -->
-        <dependency>
+        <!--dependency>
             <groupId>org.eclipse.emf</groupId>
             <artifactId>common</artifactId>
             <version>2.11.0.v20150512-0501</version>
@@ -93,8 +97,8 @@
 
         <dependency>
             <groupId>org.eclipse.uml2</groupId>
-            <artifactId>org.eclipse.uml2.uml</artifactId>
-            <version>3.1.0.v201006071150</version>
+            <artifactId>uml</artifactId>
+            <version>5.0.0-v20140602-0749</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.uml2</groupId>
@@ -105,7 +109,7 @@
             <groupId>org.eclipse.uml2</groupId>
             <artifactId>org.eclipse.uml2.uml.resources</artifactId>
             <version>3.1.0.v201005031530</version>
-        </dependency>
+        </dependency-->
 
         <!-- December 2015: (Deepak Sharma)
         MDHT Related Jars - created from Eclipse MDHT Project by Dave Carlson.
@@ -114,11 +118,89 @@
         For Development purpose now - it is uploaded to and used
         from a temporary copy at Mayo's Informatics Maven Respository
          -->
-        <dependency>
+        <!--dependency>
             <groupId>org.eclipse.mdht</groupId>
             <artifactId>uml.aml</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jibx.config.3rdparty.org.eclipse</groupId>
+            <artifactId>org.eclipse.core.runtime</artifactId>
+            <version>3.7.0.v20110110</version>
+        </dependency-->
+
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>uml</artifactId>
+            <version>5.1.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.uml2.uml_5.1.0.v20150906-1225.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>types</artifactId>
+            <version>2.0.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.uml2.types_2.0.0.v20150906-1225.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>common</artifactId>
+            <version>2.1.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.uml2.common_2.1.0.v20150906-1225.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>uml.resources</artifactId>
+            <version>5.1.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.uml2.uml.resources_5.1.0.v20150906-1225.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.uml2</groupId>
+            <artifactId>uml.profile</artifactId>
+            <version>1.0.100</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.uml2.uml.profile.standard_1.0.100.v20150906-1225.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>runtime</artifactId>
+            <version>3.11.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.plugins.dir}/org.eclipse.core.runtime_3.11.0.v20150405-1723.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>common</artifactId>
+            <version>2.11.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.plugins.dir}/org.eclipse.emf.common_2.11.0.v20150512-0501.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>ecore</artifactId>
+            <version>2.11.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.plugins.dir}/org.eclipse.emf.ecore_2.11.0.v20150512-0501.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>ecore.xmi</artifactId>
+            <version>2.11.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.plugins.dir}/org.eclipse.emf.ecore.xmi_2.11.0.v20150512-0501.jar</systemPath>
+        </dependency>
+
+        <!--dependency>
+            <groupId>org.openhealthtools.mdht</groupId>
+            <artifactId>uml.common</artifactId>
+            <version>2.5.4</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.plugins.dir}/org.openhealthtools.mdht.uml.common_2.5.4.201510221003.jar</systemPath>
+        </dependency-->
 
     </dependencies>
 

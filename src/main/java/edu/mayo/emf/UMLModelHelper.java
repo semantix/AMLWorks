@@ -1,18 +1,24 @@
-package edu.mayo.aml.main;
+package edu.mayo.emf;
 
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by dks02 on 12/8/15.
@@ -27,7 +33,7 @@ public class UMLModelHelper
 
         model.setName(name);
 
-        logger.info("Model '" + model.getQualifiedName() + "' created.");
+        logger.info("MyModel '" + model.getQualifiedName() + "' created.");
 
         return model;
     }
@@ -245,7 +251,7 @@ public class UMLModelHelper
         ResourceSet resourceSet = new ResourceSetImpl();
 
         Resource resource = resourceSet.createResource(uri);
-        resource.getContents().add(pkg.getModel());
+        resource.getContents().add(pkg);
 
         try {
             resource.save(null);
@@ -255,8 +261,83 @@ public class UMLModelHelper
         }
     }
 
-    public static void applyProfile(URI uri)
+    public static Package load(URI urip)
     {
+         Package package_ = null;
 
+         try
+         {
+             ResourceSet resourceSet = new ResourceSetImpl();
+
+             // Registering for "uml"
+             resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION,
+                     UMLResource.Factory.INSTANCE);
+
+             resourceSet.getPackageRegistry().put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
+             resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
+
+             // Registering for "xmi"
+             resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml",
+                     UMLResource.Factory.INSTANCE);
+
+             // Registering for "ecore"
+             resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",
+                     new EcoreResourceFactoryImpl());
+
+             Map uriMap = URIConverter.URI_MAP;
+             URI uri = URI.createURI("jar:file:/Users/dks02/A123/downloads/eclipse/plugins/org.eclipse.uml2.uml.resources_5.1.0.v20150906-1225.jar!/");
+             uriMap.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP), uri.appendSegment("libraries").appendSegment(""));
+             uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), uri.appendSegment("metamodels").appendSegment(""));
+             uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), uri.appendSegment("profiles").appendSegment(""));
+             uriMap.put(URI.createURI("platform:/plugin/org.eclipse.uml2.uml/"), urip);
+
+             Map extensionToFactoryMap =
+                     Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+             extensionToFactoryMap.put(UMLResource.FILE_EXTENSION,
+                     UMLResource.Factory.INSTANCE);
+             extensionToFactoryMap.put(XMI2UMLResource.FILE_EXTENSION,
+                     XMI2UMLResource.Factory.INSTANCE);
+
+             Resource resource = resourceSet.getResource(urip, true);
+             EcoreUtil.resolveAll(resource);
+
+             package_ = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(
+                     resource.getContents(), EcorePackage.Literals.EPACKAGE);
+         }
+         catch (Exception e)
+         {
+             logger.error(e.getMessage());
+         }
+
+         return package_;
+    }
+
+    public static void importLibraries(Package importee, URI imported)
+    {
+        Package library = (Package) load(imported);
+
+        // We check if a package import already exists
+        if (!importee.getImportedPackages().contains(library))
+        {
+            PackageImport impPkg = importee.createPackageImport(library);
+            impPkg.setImportedPackage(library);
+            //importee.getImportedPackages().add(library);
+
+            importee.getPackageImports().add(impPkg);
+            logger.info("Pacakge '" + imported + "' imported.");
+        }
+    }
+
+    public static PrimitiveType importPrimitiveType(Package package_, String name)
+    {
+         Model umlLibrary = (Model) load(URI.createURI(UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI));
+
+         PrimitiveType primitiveType = (PrimitiveType) umlLibrary.getOwnedType(name);
+
+         package_.createElementImport(primitiveType);
+
+         logger.info("Primitive type '" + primitiveType.getQualifiedName() + "' imported.");
+
+         return primitiveType;
     }
 }

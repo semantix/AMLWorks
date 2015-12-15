@@ -10,7 +10,7 @@ public class AMLEnvironment extends AMLProperties
 {
     final static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(AMLEnvironment.class);
 
-    // AML Reference Model
+    // AML Reference MyModel
     public static String AML_RM_NAME_PROPERTY = "aml.rm.name";
     public static String AML_RM_VERSION_PROPERTY = "aml.rm.version";
     public static String AML_RM_URIPATH_PROPERTY = "aml.rm.uri.path";

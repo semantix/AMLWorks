@@ -10,15 +10,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.mapping.ecore2xml.Ecore2XMLRegistry;
-import org.eclipse.emf.mapping.ecore2xml.impl.Ecore2XMLRegistryImpl;
-import org.eclipse.emf.mapping.ecore2xml.util.Ecore2XMLExtendedMetaData;
-import org.eclipse.mdht.uml.aml.constraint.ComplexObjectConstraint;
-import org.eclipse.mdht.uml.aml.constraint.ConstraintFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resource.XMI212UMLResource;
 
@@ -159,8 +153,6 @@ public class AMLMain
             Resource resource2 = resourceSet2.createResource(uri);
             resource2.getContents().add(rmtopObj);
 
-            ComplexObjectConstraint cc = ConstraintFactory.eINSTANCE.createComplexObjectConstraint();
-
             try
             {
                 resource2.save(null);
@@ -239,8 +231,8 @@ public class AMLMain
         Resource resource = resourceSet.getResource(ecoreResourceURI, true);
 
         Map defaultLoadOptions = resourceSet.getLoadOptions();
-        defaultLoadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA,
-                getExtendedMetaData());
+        //defaultLoadOptions.put(XMLResource.OPTION_EXTENDED_META_DATA,
+        //        getExtendedMetaData());
         defaultLoadOptions.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE,
                 Boolean.TRUE);
         defaultLoadOptions.put(XMLResource.OPTION_RESOURCE_HANDLER,
@@ -262,6 +254,7 @@ public class AMLMain
         return null;
     }
 
+    /*
     public ExtendedMetaData getExtendedMetaData()
     {
         ExtendedMetaData extendedMetaData = null;
@@ -275,4 +268,5 @@ public class AMLMain
 
         return extendedMetaData;
     }
+    */
 }
