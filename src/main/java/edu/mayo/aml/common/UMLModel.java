@@ -6,14 +6,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.uml2.uml.Element;
-import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resource.XMI212UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.openhealthtools.mdht.uml.common.search.ModelSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.List;
 
 /**
  * Created by dks02 on 12/11/15.
@@ -152,27 +147,5 @@ public class UMLModel
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void printResource(Model model)
-    {
-        if (model == null)
-        {
-            logger_.info("WARNING: Model is null or empty!");
-            return;
-        }
-
-        logger_.info("Printing Resource ...");
-        logger_.info("*****         BEGIN        *********");
-        logger_.info("" + model.getName());
-        logger_.info("**************");
-
-        List<Element> allPackages = ModelSearch.findAllOf(model, Package.class);
-        for (Element element : allPackages)
-        {
-            Package pkg = (Package) element;
-            logger_.info(pkg.getName());
-        }
-        logger_.info("*****         END        *********\n");
     }
 }
