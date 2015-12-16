@@ -1,17 +1,19 @@
-package edu.mayo.aml.rm;
+package edu.mayo.aml.main;
 
+import edu.mayo.aml.common.UMLModel;
 import edu.mayo.emf.UMLModelHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.PrimitiveType;
+import org.eclipse.uml2.uml.Property;
 
 import java.io.File;
 
 /**
  * Created by dks02 on 12/8/15.
  */
-public class CreateAMLRM extends MyModel
+public class CreateAMLRM extends UMLModel
 {
 
     public CreateAMLRM(File file)
@@ -38,12 +40,12 @@ public class CreateAMLRM extends MyModel
 
         CreateAMLRM amlRMModel = new CreateAMLRM(outputModel);
 
-        Model amlRM = UMLModelHelper.createModel("AML_RM");
+        org.eclipse.uml2.uml.Model amlRM = UMLModelHelper.createModel("AML_RM");
 
         //UMLUtil.importLibrary(amlRM, UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI);
         //UMLModelHelper.importLibraries(amlRM, URI.createURI(UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI));
         //UMLModelHelper.importLibraries(amlRM, URI.createURI(UMLResource.XML_PRIMITIVE_TYPES_LIBRARY_URI));
-        Package cimiRMPkg = UMLModelHelper.createPackage(amlRM, "CIMI Reference MyModel");
+        Package cimiRMPkg = UMLModelHelper.createPackage(amlRM, "CIMI Reference UMLModel");
 
         Package primitiveTypesPkg = UMLModelHelper.createPackage(cimiRMPkg, "Primitive Types");
 

@@ -33,7 +33,7 @@ public class UMLModelHelper
 
         model.setName(name);
 
-        logger.info("MyModel '" + model.getQualifiedName() + "' created.");
+        logger.info("UMLModel '" + model.getQualifiedName() + "' created.");
 
         return model;
     }

@@ -194,13 +194,13 @@
             <systemPath>${eclipse.plugins.dir}/org.eclipse.emf.ecore.xmi_2.11.0.v20150512-0501.jar</systemPath>
         </dependency>
 
-        <!--dependency>
+        <dependency>
             <groupId>org.openhealthtools.mdht</groupId>
             <artifactId>uml.common</artifactId>
             <version>2.5.4</version>
             <scope>system</scope>
-            <systemPath>${eclipse.plugins.dir}/org.openhealthtools.mdht.uml.common_2.5.4.201510221003.jar</systemPath>
-        </dependency-->
+            <systemPath>${eclipse.p2.dir}/org.openhealthtools.mdht.uml.common_2.5.4.201510221003.jar</systemPath>
+        </dependency>
 
     </dependencies>
 
