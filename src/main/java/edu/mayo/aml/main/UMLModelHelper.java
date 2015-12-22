@@ -1,4 +1,4 @@
-package edu.mayo.emf;
+package edu.mayo.aml.main;
 
 
 import org.eclipse.emf.common.util.URI;

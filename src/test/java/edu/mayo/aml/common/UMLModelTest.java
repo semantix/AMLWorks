@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 
 /**
@@ -14,15 +15,15 @@ public class UMLModelTest extends TestCase
 {
     public void testGetRootPackage() throws Exception
     {
-        String rmPath = AMLEnvironment.getModelUriPath(AMLEnvironment.AML_RM_KEY); // ReferenceModel
-        String rmpPath = AMLEnvironment.getModelUriPath(AMLEnvironment.AML_RMP_KEY); // Reference UMLModel Profile
-        String tpPath = AMLEnvironment.getModelUriPath(AMLEnvironment.AML_TP_KEY);  // Terminology Profile
-        String cpPath = AMLEnvironment.getModelUriPath(AMLEnvironment.AML_CP_KEY);  // Constraint Profile
+        String rmPath = AMLEnvironment.getReferenceModelUriPath("cimi"); // AMLReferenceModelImpl
+        String rmpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY); // Reference UMLModel Profile
+        String tpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY);  // Terminology Profile
+        String cpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY);  // Constraint Profile
 
         EObject rootPackage = testGetRootPackage(rmPath);
         assertNotNull(rootPackage);
         // should be a UML UMLModel
-        assertTrue(rootPackage instanceof org.eclipse.uml2.uml.Model);
+        assertTrue(rootPackage instanceof Model);
 
         // Next 3 should be a UML Profiles
         rootPackage = testGetRootPackage(rmpPath);

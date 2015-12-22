@@ -25,7 +25,7 @@ public class UMLModel
 {
     final static Logger logger_ = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(UMLModel.class);
 
-    private URI uri_ = null;
+    protected URI uri_ = null;
 
     private ResourceSet resourceSet_ = new ResourceSetImpl();
     private Resource resource_ = null;

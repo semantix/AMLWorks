@@ -1,7 +1,6 @@
 package edu.mayo.aml.main;
 
 import edu.mayo.aml.common.UMLModel;
-import edu.mayo.emf.UMLModelHelper;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;

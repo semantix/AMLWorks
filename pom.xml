@@ -120,7 +120,7 @@
          -->
         <!--dependency>
             <groupId>org.eclipse.mdht</groupId>
-            <artifactId>uml.aml</artifactId>
+            <artifactId>uml.computable.aml</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
