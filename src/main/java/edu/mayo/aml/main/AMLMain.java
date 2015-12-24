@@ -1,13 +1,9 @@
 package edu.mayo.aml.main;
 
-import edu.mayo.aml.conf.AMLEnvironment;
 import edu.mayo.aml.conf.AMLResources;
 import edu.mayo.aml.services.AMLReferenceModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.net.URI;
 
 
 /**
@@ -16,7 +12,8 @@ import java.net.URI;
 public class AMLMain
 {
     final static Logger logger_ = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(AMLMain.class);
-    private AMLResources amlResources = new AMLResources(false);
+    private AMLResources amlResources = new AMLResources("mycimi", false);
+    //private AMLResources amlResources = new AMLResources(false);
 
     public static void main(String[] args)
     {
@@ -26,8 +23,8 @@ public class AMLMain
         String archetypeName = "CLUSTER";
 
 
-        URI outputFileUri = AMLEnvironment.getArchetypePublishingUri();
-        File outputModel = new File(outputFileUri);
+       // URI outputFileUri = AMLEnvironment.getArchetypePublishingUri();
+        //File outputModel = new File(outputFileUri);
 
 
     }

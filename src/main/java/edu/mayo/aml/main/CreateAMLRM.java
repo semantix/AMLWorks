@@ -1,11 +1,13 @@
 package edu.mayo.aml.main;
 
+import edu.mayo.aml.common.AMLProfile;
 import edu.mayo.aml.common.UMLModel;
+import edu.mayo.aml.conf.AMLEnvironment;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.PrimitiveType;
-import org.eclipse.uml2.uml.Property;
 
 import java.io.File;
 
@@ -28,23 +30,40 @@ public class CreateAMLRM extends UMLModel
     // This is the way to create a UML Profile
     public static void main(String[] args)
     {
-        String uriPath = "/Users/dks02/A123/EclipseWS/MDA/UMLModels/CIMIRMFromProgram/AM_RM_Programmed.uml";
+        String uriPath = "src/main/resources/computable/rm/AM_RM_Programmed.uml";
         File outputModel = new File(uriPath);
 
         if (outputModel.exists())
         {
             //outputModel.delete();
-
         }
 
         CreateAMLRM amlRMModel = new CreateAMLRM(outputModel);
+        Resource resource = amlRMModel.getResource();
 
-        org.eclipse.uml2.uml.Model amlRM = UMLModelHelper.createModel("AML_RM");
+        if (resource == null)
+        {
+            resource = amlRMModel.getResourceSet().createResource(URI.createURI(uriPath));
+            amlRMModel.setResource(resource);
+        }
 
-        //UMLUtil.importLibrary(amlRM, UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI);
-        //UMLModelHelper.importLibraries(amlRM, URI.createURI(UMLResource.UML_PRIMITIVE_TYPES_LIBRARY_URI));
-        //UMLModelHelper.importLibraries(amlRM, URI.createURI(UMLResource.XML_PRIMITIVE_TYPES_LIBRARY_URI));
+        Model amlRM = UMLModelHelper.createModel("AML_RM");
+
+
+        String rmpuriPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY);
+        AMLProfile rmpProfile = new AMLProfile(new File(rmpuriPath));
+
+        Profile rmp = rmpProfile.getProfile();
+
+        //rmp.define();
+
+        amlRM.applyProfile(rmp);
+
+        Stereotype refrenceModelStereotype = rmp.getOwnedStereotype("ReferenceModel");
+
         Package cimiRMPkg = UMLModelHelper.createPackage(amlRM, "CIMI Reference UMLModel");
+        cimiRMPkg.applyProfile(rmp);
+        cimiRMPkg.applyStereotype(refrenceModelStereotype);
 
         Package primitiveTypesPkg = UMLModelHelper.createPackage(cimiRMPkg, "Primitive Types");
 
@@ -69,9 +88,11 @@ public class CreateAMLRM extends UMLModel
         Property rmVersion = UMLModelHelper.createAttribute(archetypedClass, "rm_version", stringPrimitiveDataType, 1, 1);
         rmVersion.setDefault("3.0.5");
 
-        Package modelPkg = amlRM.getModel();
+        Model modelPkg = amlRM.getModel();
 
+        amlRMModel.getResource().getContents().clear();
         amlRMModel.getResource().getContents().add(amlRM);
+        //amlRMModel.getResource().getContents().add(rmp);
         amlRMModel.save();
     }
 }

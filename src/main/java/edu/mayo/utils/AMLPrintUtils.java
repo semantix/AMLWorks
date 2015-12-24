@@ -3,7 +3,7 @@ package edu.mayo.utils;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Package;
-import org.openhealthtools.mdht.uml.common.search.ModelSearch;
+import org.eclipse.mdht.uml.common.search.ModelSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

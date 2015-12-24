@@ -30,11 +30,20 @@ public class AMLResources
     private boolean print = false;
     private String currentRM_ = null;
 
+    public AMLResources(String rmName, boolean verbose)
+    {
+        this.print = verbose;
+        initProfiles();
+        // Will try to load only the specified RM.
+        initRMs(rmName);
+    }
+
     public AMLResources(boolean verbose)
     {
         this.print = verbose;
         initProfiles();
-        initRMs();
+        // will load all available RMs
+        initRMs(null);
     }
 
     private AMLReferenceModel getAndPrintModel(String rmName, boolean print)
@@ -42,8 +51,13 @@ public class AMLResources
         if (StringUtils.isEmpty(rmName))
             return null;
 
-        String uriPath = AMLEnvironment.getReferenceModelUriPath(rmName); // AMLReferenceModelImpl
-        AMLReferenceModelImpl model = new AMLReferenceModelImpl(rmName, new File(uriPath));
+        // Location of Reference Model
+        String rmUriPath = AMLEnvironment.getRMUriPath(rmName);
+        File rmFile = new File(rmUriPath);
+
+
+
+        AMLReferenceModel model = new AMLReferenceModelImpl(rmName, rmFile, this.rmp);
 
         currentRM_ = (model.isDefaultReferenceModel())? rmName : currentRM_;
 
@@ -79,8 +93,9 @@ public class AMLResources
         cp = referenceModelProfile.getProfile();
     }
 
-    private void initRMs()
+    private void initRMs(String rmName)
     {
+        boolean match = false;
         try
         {
             String[] rms = AMLEnvironment.getRMs();
@@ -90,6 +105,10 @@ public class AMLResources
 
             for (String rm : rms)
             {
+                if ((!StringUtils.isEmpty(rmName))&&(!rm.equals(rmName)))
+                    continue;
+
+                match = true;
                 logger_.info(">>>> Loading Reference Model:" + rm);
                 AMLReferenceModel amlRM = getAndPrintModel(rm, print);
 
@@ -108,6 +127,9 @@ public class AMLResources
             e.printStackTrace();
             logger_.error("failed to read ");
         }
+
+        if (!match)
+            logger_.warn("Requested Reference Model with name " + rmName + " could not be found!");
     }
 
     public AMLReferenceModel getCurrentReferenceModel()

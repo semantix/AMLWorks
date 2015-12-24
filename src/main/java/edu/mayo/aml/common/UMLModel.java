@@ -61,6 +61,7 @@ public class UMLModel
         {
             this.resource_ = this.getResourceSet().getResource(this.uri_, true);
             this.resource_.load(null);
+            //EcoreUtil.resolveAll(this.resource_);
         }
         catch (Exception e)
         {
@@ -73,6 +74,11 @@ public class UMLModel
         return this.resource_;
     }
 
+    public void setResource(Resource resource)
+    {
+        this.resource_ = resource;
+    }
+
     public ResourceSet getResourceSet()
     {
         return this.resourceSet_;
@@ -82,7 +88,6 @@ public class UMLModel
     {
         if (this.resource_ == null)
             return null;
-
 
         if (this.resource_.getContents().isEmpty())
             return null;

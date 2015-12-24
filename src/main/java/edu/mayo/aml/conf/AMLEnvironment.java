@@ -68,16 +68,31 @@ public class AMLEnvironment
         return "true".equalsIgnoreCase(value);
     }
 
-    public static String getReferenceModelUriPath(String rmName)
+    public static String getRMUriPath(String rmName)
     {
         String pref = StringUtils.isEmpty(getResourcesPathPrefix())? "" : (getResourcesPathPrefix() + File.separator);
         return pref + properties_.getPropertyValue(AMLEnvironment.getRMKey(rmName) + ".path");
     }
 
-    public static String getProfileUriPath(String rmName)
+    public static String getRMRegisteredUri(String rmName)
+    {
+        return properties_.getPropertyValue(AMLEnvironment.getRMKey(rmName) + ".uri");
+    }
+
+    public static String getProfileRegisteredUri(String profileName)
+    {
+        return properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".uri");
+    }
+
+    public static String getProfileUriPathMap(String profileName)
+    {
+        return properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".pathMap");
+    }
+
+    public static String getProfileUriPath(String profileName)
     {
         String pref = StringUtils.isEmpty(getResourcesPathPrefix())? "" : (getResourcesPathPrefix() + File.separator);
-        return pref + properties_.getPropertyValue(AMLEnvironment.getProfileKey(rmName) + ".path");
+        return pref + properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
     }
 
     public static String getAMLArchetypesCollectionPath()

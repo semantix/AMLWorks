@@ -30,6 +30,10 @@ public class AMLProfile extends UMLModel
         if (this.getResource() == null)
             return null;
 
-        return (Profile) this.getRootPackage();
+        Profile profile = (Profile) this.getRootPackage();
+
+        profile.define();
+
+        return profile;
     }
 }

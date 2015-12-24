@@ -194,13 +194,36 @@
             <systemPath>${eclipse.plugins.dir}/org.eclipse.emf.ecore.xmi_2.11.0.v20150512-0501.jar</systemPath>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.openhealthtools.mdht</groupId>
             <artifactId>uml.common</artifactId>
             <version>2.5.4</version>
             <scope>system</scope>
             <systemPath>${eclipse.p2.dir}/org.openhealthtools.mdht.uml.common_2.5.4.201510221003.jar</systemPath>
+        </dependency-->
+
+        <dependency>
+            <groupId>org.eclipse.mdht</groupId>
+            <artifactId>uml.common</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/MDHT_UML.jar</systemPath>
         </dependency>
+
+        <!--dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>common</artifactId>
+            <version>3.7.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.equinox.common_3.7.0.v20150402-1709.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>resources</artifactId>
+            <version>3.10.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.core.resources_3.10.1.v20150725-1910.jar</systemPath>
+        </dependency-->
 
     </dependencies>
 
