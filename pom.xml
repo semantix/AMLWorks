@@ -210,6 +210,22 @@
             <systemPath>${eclipse.p2.dir}/MDHT_UML.jar</systemPath>
         </dependency>
 
+        <dependency>
+            <groupId>org.eclipse.mdht</groupId>
+            <artifactId>uml.aml</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/MDHT_AML.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.emf</groupId>
+            <artifactId>mapping</artifactId>
+            <version>2.9.0</version>
+            <scope>system</scope>
+            <systemPath>${eclipse.p2.dir}/org.eclipse.emf.mapping.ecore2xml_2.9.0.v20150806-0404.jar</systemPath>
+        </dependency>
+
         <!--dependency>
             <groupId>org.eclipse.equinox</groupId>
             <artifactId>common</artifactId>

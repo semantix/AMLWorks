@@ -3,10 +3,12 @@ package edu.mayo.aml.main;
 import edu.mayo.aml.common.AMLProfile;
 import edu.mayo.aml.common.UMLModel;
 import edu.mayo.aml.conf.AMLEnvironment;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Package;
 
 import java.io.File;
@@ -47,6 +49,9 @@ public class CreateAMLRM extends UMLModel
             amlRMModel.setResource(resource);
         }
 
+        EList<EObject> contents = resource.getContents();
+        contents.clear();
+
         Model amlRM = UMLModelHelper.createModel("AML_RM");
 
 
@@ -55,15 +60,16 @@ public class CreateAMLRM extends UMLModel
 
         Profile rmp = rmpProfile.getProfile();
 
-        //rmp.define();
-
         amlRM.applyProfile(rmp);
+
 
         Stereotype refrenceModelStereotype = rmp.getOwnedStereotype("ReferenceModel");
 
-        Package cimiRMPkg = UMLModelHelper.createPackage(amlRM, "CIMI Reference UMLModel");
-        cimiRMPkg.applyProfile(rmp);
+        Package cimiRMPkg = UMLModelHelper.createPackage(amlRM, "CIMI Reference Model");
+        System.out.println("Is Applicable:" + cimiRMPkg.isStereotypeApplicable(refrenceModelStereotype));
+        //cimiRMPkg.applyProfile(rmp);
         cimiRMPkg.applyStereotype(refrenceModelStereotype);
+
 
         Package primitiveTypesPkg = UMLModelHelper.createPackage(cimiRMPkg, "Primitive Types");
 
@@ -88,11 +94,13 @@ public class CreateAMLRM extends UMLModel
         Property rmVersion = UMLModelHelper.createAttribute(archetypedClass, "rm_version", stringPrimitiveDataType, 1, 1);
         rmVersion.setDefault("3.0.5");
 
-        Model modelPkg = amlRM.getModel();
+        //Resource modelResource = amlRM.eResource();
+        //modelResource.setURI(URI.createFileURI(outputModel.getAbsolutePath()));
 
-        amlRMModel.getResource().getContents().clear();
-        amlRMModel.getResource().getContents().add(amlRM);
-        //amlRMModel.getResource().getContents().add(rmp);
+        contents.add(amlRM);
+        contents.addAll(amlRM.getStereotypeApplications());
+        contents.addAll(cimiRMPkg.getStereotypeApplications());
+
         amlRMModel.save();
     }
 }

@@ -33,7 +33,8 @@ public class AMLResources
     public AMLResources(String rmName, boolean verbose)
     {
         this.print = verbose;
-        initProfiles();
+        // now we are loading it from MDHT_AML.jar
+        // initProfiles();
         // Will try to load only the specified RM.
         initRMs(rmName);
     }
@@ -41,7 +42,10 @@ public class AMLResources
     public AMLResources(boolean verbose)
     {
         this.print = verbose;
-        initProfiles();
+
+        // now we are loading it from MDHT_AML.jar
+        // initProfiles();
+
         // will load all available RMs
         initRMs(null);
     }
@@ -55,9 +59,7 @@ public class AMLResources
         String rmUriPath = AMLEnvironment.getRMUriPath(rmName);
         File rmFile = new File(rmUriPath);
 
-
-
-        AMLReferenceModel model = new AMLReferenceModelImpl(rmName, rmFile, this.rmp);
+        AMLReferenceModel model = new AMLReferenceModelImpl(rmName, rmFile);
 
         currentRM_ = (model.isDefaultReferenceModel())? rmName : currentRM_;
 
@@ -73,7 +75,7 @@ public class AMLResources
             return null;
 
         String uriPath = AMLEnvironment.getProfileUriPath(profileName);
-        AMLProfile amlProfile = new AMLProfile(new File(uriPath));
+        AMLProfile amlProfile = new AMLProfile(uriPath);
 
         if (print)
             AMLPrintUtils.printUMLProfile(amlProfile.getProfile());
@@ -87,10 +89,10 @@ public class AMLResources
         rmp = referenceModelProfile.getProfile();
 
         AMLProfile terminologyProfile = getAndPrintProfile(AMLEnvironment.AML_TP_KEY, print);
-        tp = referenceModelProfile.getProfile();
+        tp = terminologyProfile.getProfile();
 
         AMLProfile constraintProfile = getAndPrintProfile(AMLEnvironment.AML_CP_KEY, print);
-        cp = referenceModelProfile.getProfile();
+        cp = constraintProfile.getProfile();
     }
 
     private void initRMs(String rmName)

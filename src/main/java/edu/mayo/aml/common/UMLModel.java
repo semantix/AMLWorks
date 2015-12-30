@@ -1,11 +1,18 @@
 package edu.mayo.aml.common;
 
+import edu.mayo.aml.conf.AMLEnvironment;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.type.impl.AnyTypeImpl;
+import org.eclipse.mdht.uml.aml.constraint.ConstraintPackage;
+import org.eclipse.mdht.uml.aml.refmodel.RefModelPackage;
+import org.eclipse.mdht.uml.aml.terminology.TerminologyPackage;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resource.XMI212UMLResource;
@@ -55,13 +62,13 @@ public class UMLModel
 
     private void init()
     {
-        registerPathmaps(this.getResourceSet());
-
         try
         {
-            this.resource_ = this.getResourceSet().getResource(this.uri_, true);
+            UMLResourcesUtil.init(this.getResourceSet());
+            registerPathmaps(this.resourceSet_);
+            this.resource_ = this.resourceSet_.getResource(this.uri_, true);
             this.resource_.load(null);
-            //EcoreUtil.resolveAll(this.resource_);
+            //EcoreUtil.resolveAll(this.resourceSet_);
         }
         catch (Exception e)
         {
@@ -92,7 +99,22 @@ public class UMLModel
         if (this.resource_.getContents().isEmpty())
             return null;
 
-        return this.resource_.getContents().get(0);
+
+        EList<EObject> contents = this.resource_.getContents();
+
+        EObject root = contents.get(0);
+
+        if (contents.size() > 1)
+            for (EObject obj : contents)
+                if (obj instanceof AnyTypeImpl)
+                    continue;
+                else
+                {
+                    root = obj;
+                    break;
+                }
+
+        return root;
     }
 
     private void registerPathmaps(ResourceSet set)
@@ -111,10 +133,17 @@ public class UMLModel
         set.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION,
                 UMLResource.Factory.INSTANCE);
 
+        EPackage.Registry.INSTANCE.put(RefModelPackage.eNS_URI, RefModelPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(ConstraintPackage.eNS_URI, ConstraintPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(TerminologyPackage.eNS_URI, TerminologyPackage.eINSTANCE);
+
         URI umlResourcePluginURI = URI.createURI("jar:file:" + umlResourcePath + "!/");
 
         set.getURIConverter().getURIMap().put(URI.createURI(UMLResource.LIBRARIES_PATHMAP),
                 umlResourcePluginURI.appendSegment("libraries").appendSegment(""));
+
+        set.getURIConverter().getURIMap().put(URI.createURI(UMLResource.PROFILES_PATHMAP),
+                umlResourcePluginURI.appendSegment("profiles").appendSegment(""));
 
         set.getURIConverter().getURIMap().put(URI.createURI(UMLResource.METAMODELS_PATHMAP),
                 umlResourcePluginURI.appendSegment("metamodels").appendSegment(""));
@@ -127,6 +156,23 @@ public class UMLModel
 
         set.getURIConverter().getURIMap().put(URI.createURI(UMLResource.UML2_PROFILE_URI),
                 umlResourcePluginURI.appendSegment("profiles").appendSegment("UML2.profile.uml"));
+
+        //--------------------------------------------------------------------------------
+        // Location of the Reference Model Profile (that is applied on a Reference Model)
+        // It is important to register it with the model so that we can find out the
+        // Profile and its application on the Reference Model.
+        URI rmpPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_RMP_KEY));
+        URI rmpPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY));
+        set.getURIConverter().getURIMap().put(rmpPathMapURI, rmpPathURI);
+
+        URI termPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_TP_KEY));
+        URI termPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY));
+        set.getURIConverter().getURIMap().put(termPathMapURI, termPathURI);
+
+        URI constPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_CP_KEY));
+        URI constPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY));
+        set.getURIConverter().getURIMap().put(constPathMapURI, constPathURI);
+        //--------------------------------------------------------------------------------
 
         // Registering for "uml"
         set.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION,

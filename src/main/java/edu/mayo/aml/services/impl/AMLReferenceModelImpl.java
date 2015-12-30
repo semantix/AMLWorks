@@ -7,17 +7,24 @@ import edu.mayo.aml.services.ReferenceModelStatus;
 import edu.mayo.utils.AMLPrintUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.mdht.uml.aml.refmodel.*;
+import org.eclipse.mdht.uml.aml.refmodel.util.RefModelSwitch;
 import org.eclipse.mdht.uml.common.search.ModelSearch;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.util.UMLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,22 +50,22 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
     private HashMap<String, Class> allClasses_ = new HashMap<String, Class>();
     private HashMap<String, Property> allProperties_ = new HashMap<String, Property>();
 
-    public AMLReferenceModelImpl(String name, File file, Profile referenceModelProfile)
+    public AMLReferenceModelImpl(String name, File file)
     {
         super(file);
-        populate(name, referenceModelProfile);
+        populate(name);
     }
 
-    public AMLReferenceModelImpl(String name, URI uri, Profile referenceModelProfile)
+    public AMLReferenceModelImpl(String name, URI uri)
     {
         super(uri);
-        populate(name, referenceModelProfile);
+        populate(name);
     }
 
-    public AMLReferenceModelImpl(String name, String uriPath, Profile referenceModelProfile)
+    public AMLReferenceModelImpl(String name, String uriPath)
     {
         super(uriPath);
-        populate(name, referenceModelProfile);
+        populate(name);
     }
 
     public Model getUMLModel()
@@ -66,26 +73,9 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
         if (this.getResource() == null)
             return null;
 
-        return (Model) this.getRootPackage();
-    }
+        Model mdl = (Model) this.getRootPackage();
 
-    // Register Addtional maps to resolve references to external
-    // resources like Profiles.
-    private void registerMaps()
-    {
-        // Location of the Reference Model Profile (that is applied on a Reference Model)
-        // It is important to register it with the model so that we can find out the
-        // Profile and its application on the Reference Model.
-        URI rmpPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_RMP_KEY));
-        URI rmpPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY));
-
-        if (rmpPathMapURI == null)
-            return;
-
-        if (rmpPathURI == null)
-            return;
-
-        this.getResourceSet().getURIConverter().getURIMap().put(rmpPathMapURI, rmpPathURI);
+        return mdl;
     }
 
     public void setStatus(ReferenceModelStatus status)
@@ -197,15 +187,9 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
         package_ = modelPackage;
     }
 
-    public void populate(String name, Profile profile)
+    public void populate(String name)
     {
         setName(name);
-
-        // this registration is crucial resolving profile or other
-        // external resources
-        registerMaps();
-
-        this.referenceModelProfile_ = profile;
 
         if (this.getUMLModel() == null)
         {
@@ -220,6 +204,7 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
         {
             Package pkg = (Package) element;
             //logger_.info("Package: " + pkg.getName());
+            EList<Stereotype> stereotypes = pkg.getAppliedStereotypes();
             this.allPackages_.put(pkg.getQualifiedName(), pkg);
             List<Element> allClasses = ModelSearch.findAllOf(pkg, Class.class);
             for (Element clazz : allClasses)
@@ -265,41 +250,98 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
 
         Model model = (Model) this.getRootPackage();
 
-        boolean applied = false;
-
         List<Profile> profiles = model.getAllAppliedProfiles();
-        for (Profile profile : profiles)
-            if (referenceModelURI.equals(profile.getURI()))
-                applied = true;
+        this.referenceModelProfile_ = profiles.get(0);
 
-        if (!applied)
+        if (this.referenceModelProfile_ == null)
             return null;
 
-        EList<Stereotype> modelStereotypes = model.getAppliedStereotypes();
+        final Stereotype refrenceModelStereotype = referenceModelProfile_.getOwnedStereotype("ReferenceModel");
 
-        Stereotype refrenceModelStereotype = referenceModelProfile_.getOwnedStereotype("ReferenceModel");
+        RefModelSwitch refSwitch = new RefModelSwitch(){
+            @Override
+            public Object caseReferenceModel(ReferenceModel refModel)
+            {
+                logger_.info("\tReferenceModel found !" + refModel.getBase_Package().getName());
+                logger_.info("\tReferenceModel NS !" + refModel.getRmNamespace());
+                logger_.info("\tReferenceModel Publisher !" + refModel.getRmPublisher());
+                logger_.info("\tReferenceModel Version !" + refModel.getRmVersion());
+
+                return super.caseReferenceModel(refModel);
+            }
+
+            @Override
+            public Object caseMappedDataType(MappedDataType object)
+            {
+                EList<NamedElement> clients = object.getBase_Abstraction().getClients();
+                logger_.info("\tMapped DataType Abstraction Client:" + clients.size());
+                for (NamedElement ne : clients)
+                    logger_.info("\t\tClient:" + ne.getName());
+                return super.caseMappedDataType(object);
+            }
+
+            @Override
+            public Object caseInfrastructure(Infrastructure object)
+            {
+                logger_.info("\tInfrastructure Property:" + object.getBase_Property().getName());
+                return super.caseInfrastructure(object);
+            }
+
+            @Override
+            public Object caseRuntime(org.eclipse.mdht.uml.aml.refmodel.Runtime object)
+            {
+                logger_.info("\tRuntime Property:" + object.getBase_Property().getName());
+                return super.caseRuntime(object);
+            }
+        };
+
+        TreeIterator trit = EcoreUtil.getAllProperContents(this.getResource(), true);
+
+        while (trit.hasNext())
+        {
+            Object trito = trit.next();
+            Stereotype stp = null;
+            ReferenceModel referenceModel = (ReferenceModel) refSwitch.doSwitch((EObject) trito);
+
+            if (referenceModel != null)
+                logger_.info("Classifier:" + referenceModel.getBase_Package());
+
+            stp = UMLUtil.getStereotype((EObject) trito);
+
+            logger_.info("TreeIterator=" + ((EObject)trito).eClass().getName());
+
+            if (stp != null)
+                logger_.info("STereoptype here:" + stp.getName());
+
+        }
+
+        //List<Element> allstereos = ModelSearch.findStereotypeApplications(this.getResourceSet(), refrenceModelStereotype);
 
         for (Package pkg : allPackages_.values())
         {
-            if (pkg.getName().equals("CIMI Reference Model"))
+            if (pkg.getName().endsWith("Reference Model"))
             {
-                List<Stereotype> stereotypes = pkg.getAppliedStereotypes();
-
-                List<EObject> stereoApps = ModelSearch.findStereotypeApplications(pkg.eResource(), refrenceModelStereotype);
-
-
-
-                if (stereotypes.isEmpty())
-                {
-
-                }
+                EList<Stereotype> pkgst = pkg.getAppliedStereotypes();
+                logger_.info("Package Stereotypes=" + pkgst.size());
             }
-
-            if (!applied)
-                logger_.info("No Stereotype");
-            else
-                logger_.info("Stereotypes:" + pkg.getAppliedStereotypes());
         }
+
+        Iterator var4 = this.getResource().getContents().iterator();
+        ArrayList elementList = new ArrayList();
+        while(var4.hasNext())
+        {
+            EObject eObject = (EObject)var4.next();
+            EcoreUtil.resolveAll(eObject);
+            if(refrenceModelStereotype.equals(UMLUtil.getStereotype(eObject)))
+            {
+                elementList.add(eObject);
+            }
+        }
+
+        EList<Stereotype> modelStereotypes = model.getAppliedStereotypes();
+
+
+        List<EObject> stereos = ModelSearch.findStereotypeApplications(this.getResource(), refrenceModelStereotype);
 
         return null;
     }

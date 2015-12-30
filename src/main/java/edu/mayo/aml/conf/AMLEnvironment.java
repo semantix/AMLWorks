@@ -1,9 +1,12 @@
 package edu.mayo.aml.conf;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.mdht.uml.aml.refmodel.ReferenceModel;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 
 /**
  * Created by dks02 on 12/7/15.
@@ -91,8 +94,27 @@ public class AMLEnvironment
 
     public static String getProfileUriPath(String profileName)
     {
+        // Previously I was using it from the property files:
+        /*
         String pref = StringUtils.isEmpty(getResourcesPathPrefix())? "" : (getResourcesPathPrefix() + File.separator);
         return pref + properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
+        */
+
+        String profileJarFilePath = ReferenceModel.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        try
+        {
+            profileJarFilePath = URLDecoder.decode(profileJarFilePath, "UTF-8");
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+
+        org.eclipse.emf.common.util.URI profileJarFileURI = org.eclipse.emf.common.util.URI.createURI("jar:file:" + profileJarFilePath + "!/");
+
+        String modelProfile = properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
+
+        return profileJarFileURI.appendSegment("model").appendSegment(modelProfile).toString();
     }
 
     public static String getAMLArchetypesCollectionPath()

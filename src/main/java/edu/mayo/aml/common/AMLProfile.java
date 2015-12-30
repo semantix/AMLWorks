@@ -32,7 +32,8 @@ public class AMLProfile extends UMLModel
 
         Profile profile = (Profile) this.getRootPackage();
 
-        profile.define();
+        if (!profile.isDefined())
+            profile.define();
 
         return profile;
     }

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 public class AMLMain
 {
     final static Logger logger_ = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(AMLMain.class);
-    private AMLResources amlResources = new AMLResources("mycimi", false);
+    private AMLResources amlResources = new AMLResources("cimi", false);
     //private AMLResources amlResources = new AMLResources(false);
 
     public static void main(String[] args)
