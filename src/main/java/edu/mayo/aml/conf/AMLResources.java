@@ -7,11 +7,10 @@ import edu.mayo.aml.services.impl.AMLReferenceModelImpl;
 import edu.mayo.aml.services.impl.AMLReferenceModelsImpl;
 import edu.mayo.utils.AMLPrintUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.uml2.uml.Profile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 
 
 /**
@@ -27,44 +26,35 @@ public class AMLResources
     private Profile tp = null;
     private Profile cp = null;
 
-    private boolean print = false;
     private String currentRM_ = null;
 
-    public AMLResources(String rmName, boolean verbose)
+    public AMLResources(String rmName)
     {
-        this.print = verbose;
         // now we are loading it from MDHT_AML.jar
         // initProfiles();
+
         // Will try to load only the specified RM.
         initRMs(rmName);
     }
 
-    public AMLResources(boolean verbose)
+    public AMLResources()
     {
-        this.print = verbose;
-
-        // now we are loading it from MDHT_AML.jar
-        // initProfiles();
-
         // will load all available RMs
         initRMs(null);
     }
 
-    private AMLReferenceModel getAndPrintModel(String rmName, boolean print)
+    private AMLReferenceModel getAndPrintModel(String rmName)
     {
         if (StringUtils.isEmpty(rmName))
             return null;
 
         // Location of Reference Model
         String rmUriPath = AMLEnvironment.getRMUriPath(rmName);
-        File rmFile = new File(rmUriPath);
+        URI rmUri = URI.createFileURI(rmUriPath);
 
-        AMLReferenceModel model = new AMLReferenceModelImpl(rmName, rmFile);
+        AMLReferenceModel model = new AMLReferenceModelImpl(rmUri);
 
-        currentRM_ = (model.isDefaultReferenceModel())? rmName : currentRM_;
-
-        if (print)
-            AMLPrintUtils.printUMLModel(model.getUMLModel());
+        currentRM_ = rmName;
 
         return model;
     }
@@ -75,7 +65,7 @@ public class AMLResources
             return null;
 
         String uriPath = AMLEnvironment.getProfileUriPath(profileName);
-        AMLProfile amlProfile = new AMLProfile(uriPath);
+        AMLProfile amlProfile = new AMLProfile(URI.createFileURI(uriPath));
 
         if (print)
             AMLPrintUtils.printUMLProfile(amlProfile.getProfile());
@@ -85,13 +75,13 @@ public class AMLResources
 
     private void initProfiles()
     {
-        AMLProfile referenceModelProfile = getAndPrintProfile(AMLEnvironment.AML_RMP_KEY, print);
+        AMLProfile referenceModelProfile = getAndPrintProfile(AMLEnvironment.AML_RMP_KEY, true);
         rmp = referenceModelProfile.getProfile();
 
-        AMLProfile terminologyProfile = getAndPrintProfile(AMLEnvironment.AML_TP_KEY, print);
+        AMLProfile terminologyProfile = getAndPrintProfile(AMLEnvironment.AML_TP_KEY, true);
         tp = terminologyProfile.getProfile();
 
-        AMLProfile constraintProfile = getAndPrintProfile(AMLEnvironment.AML_CP_KEY, print);
+        AMLProfile constraintProfile = getAndPrintProfile(AMLEnvironment.AML_CP_KEY, true);
         cp = constraintProfile.getProfile();
     }
 
@@ -112,7 +102,7 @@ public class AMLResources
 
                 match = true;
                 logger_.info(">>>> Loading Reference Model:" + rm);
-                AMLReferenceModel amlRM = getAndPrintModel(rm, print);
+                AMLReferenceModel amlRM = getAndPrintModel(rm);
 
                 if (amlRM == null)
                 {
@@ -120,8 +110,8 @@ public class AMLResources
                     continue;
                 }
 
-                models_.addReferenceModel(amlRM);
-                logger_.info(">>>> Added RM " + amlRM);
+                models_.addReferenceModel(rmName, amlRM);
+                logger_.info(">>>> Added RM " + rmName);
             }
         }
         catch (Exception e)

@@ -2,10 +2,11 @@ package edu.mayo.aml.services.impl;
 
 import edu.mayo.aml.services.AMLReferenceModel;
 import edu.mayo.aml.services.AMLReferenceModels;
-import edu.mayo.aml.services.ReferenceModelStatus;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by dks02 on 12/22/15.
@@ -14,7 +15,6 @@ public class AMLReferenceModelsImpl implements AMLReferenceModels
 {
     // List of all the reference models
     private HashMap<String, AMLReferenceModel> models_ = new HashMap<String, AMLReferenceModel>();
-    private Vector<String> noNameModels_ = new Vector<String>();
 
     public Set<String> getAvailableReferenceModelNames()
     {
@@ -26,18 +26,15 @@ public class AMLReferenceModelsImpl implements AMLReferenceModels
         return models_.values();
     }
 
-    public boolean addReferenceModel(AMLReferenceModel newModel)
+    public boolean addReferenceModel(String key, AMLReferenceModel newModel)
     {
         if (newModel == null)
             return false;
 
-        String name = StringUtils.isEmpty(newModel.getName())?
-                    ("NO_NAME_GIVEN_" + (noNameModels_.size() + 1)):
-                    newModel.getName();
+        if (!newModel.isRMAvailable())
+            return false;
 
-        noNameModels_.add(name);
-
-        newModel.setStatus(ReferenceModelStatus.ACTIVE);
+        String name = (!StringUtils.isEmpty(key))? key : newModel.getName();
 
         models_.put(name, newModel);
 
@@ -65,8 +62,6 @@ public class AMLReferenceModelsImpl implements AMLReferenceModels
         if (model == null)
             return false;
 
-        model.setStatus(ReferenceModelStatus.ACTIVE);
-
         return true;
     }
 
@@ -76,8 +71,6 @@ public class AMLReferenceModelsImpl implements AMLReferenceModels
 
         if (model == null)
             return false;
-
-        model.setStatus(ReferenceModelStatus.DEACTIVATED);
 
         return true;
     }

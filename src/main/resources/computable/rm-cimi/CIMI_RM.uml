@@ -366,7 +366,11 @@
   <refmodel:Infrastructure xmi:id="_18_2_bf902f3_1448378859898_432247_5292" base_Property="EAID_81929096_B47F_4a83_A12C_CD42A055F6D9"/>
   <refmodel:Runtime xmi:id="_18_2_bf902f3_1448378851941_857329_5291" base_Property="EAID_E73DE3FA_4F1A_4f44_B621_B849378EA636"/>
   <refmodel:Infrastructure xmi:id="_18_2_bf902f3_1448378870879_788687_5313" base_Property="EAID_EAAABE42_F207_40f4_B896_FD776FEEF639"/>
-  <refmodel:ReferenceModel xmi:id="d0e458EnterpriseArchitectProfile" base_Package="EAPK_187D8523_BE51_4bf0_9ACF_BE8FBBC56821"/>
+  <refmodel:ReferenceModel xmi:id="d0e458EnterpriseArchitectProfile" base_Package="EAPK_187D8523_BE51_4bf0_9ACF_BE8FBBC56821">
+    <rmPublisher>CIMI</rmPublisher>
+    <rmVersion>3.0.5</rmVersion>
+    <rmNamespace>Mayo</rmNamespace>
+  </refmodel:ReferenceModel>
   <refmodel:Infrastructure xmi:id="_18_2_bf902f3_1448378824360_566386_5261" base_Property="EAID_dstFD70F4_83AC_4810_94F5_2EE881EDF5C9"/>
   <refmodel:MappedDataType xmi:id="_18_2_bf902f3_1448378643320_70914_5222" base_Abstraction="_18_2_bf902f3_1448378439139_101816_5170"/>
   <refmodel:MappedDataType xmi:id="_18_2_bf902f3_1448378639102_270686_5221" base_Abstraction="_18_2_bf902f3_1448378445158_505889_5176"/>

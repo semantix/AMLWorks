@@ -1,24 +1,27 @@
 package edu.mayo.aml.services;
 
-import org.eclipse.uml2.uml.Model;
-
 /**
  * Created by dks02 on 12/21/15.
  */
 public interface AMLReferenceModel
 {
-    // Get the Name of the model
+    // Get Description of the Reference Model
+    public String getDescription();
+
+    // Get the Name of the model's root package
     public String getName();
 
-    // Get Description of the Reference Model
-    public String getModelDescription();
+    // Get "ReferenceModel" stereotyped Package Name
+    public String getRMPackageName();
 
-    // get the contained UML Model after successful load
-    public Model getUMLModel();
+    // Get Namespace for the Reference Model
+    public String getRMNamespace();
 
-    public void setStatus(ReferenceModelStatus status);
+    // Get the Name of the publisher
+    public String getRMPublisher();
 
-    public ReferenceModelStatus getStatus();
+    // Get Version of the Reference Model
+    public String getRMVersion();
 
-    public boolean isDefaultReferenceModel();
+    public boolean isRMAvailable();
 }

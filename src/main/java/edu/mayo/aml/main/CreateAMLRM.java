@@ -18,12 +18,6 @@ import java.io.File;
  */
 public class CreateAMLRM extends UMLModel
 {
-
-    public CreateAMLRM(File file)
-    {
-        super(file);
-    }
-
     public CreateAMLRM(URI uri)
     {
         super(uri);
@@ -40,7 +34,7 @@ public class CreateAMLRM extends UMLModel
             //outputModel.delete();
         }
 
-        CreateAMLRM amlRMModel = new CreateAMLRM(outputModel);
+        CreateAMLRM amlRMModel = new CreateAMLRM(URI.createFileURI(uriPath));
         Resource resource = amlRMModel.getResource();
 
         if (resource == null)
@@ -56,7 +50,7 @@ public class CreateAMLRM extends UMLModel
 
 
         String rmpuriPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY);
-        AMLProfile rmpProfile = new AMLProfile(new File(rmpuriPath));
+        AMLProfile rmpProfile = new AMLProfile(URI.createFileURI(rmpuriPath));
 
         Profile rmp = rmpProfile.getProfile();
 

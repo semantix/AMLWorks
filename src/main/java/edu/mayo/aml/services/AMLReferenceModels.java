@@ -15,7 +15,7 @@ public interface AMLReferenceModels
     public Collection<AMLReferenceModel> getAllReferenceModels();
 
     // Add Another Reference Model
-    public boolean addReferenceModel(AMLReferenceModel newModel);
+    public boolean addReferenceModel(String modelName, AMLReferenceModel newModel);
 
     // Remove and existing Reference Model
     public boolean removeReferenceModel(String name);

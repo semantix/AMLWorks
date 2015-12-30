@@ -20,7 +20,6 @@ import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -37,26 +36,12 @@ public class UMLModel
     private ResourceSet resourceSet_ = new ResourceSetImpl();
     private Resource resource_ = null;
 
-    public UMLModel(File file)
-    {
-        if (file == null)
-            return;
-
-        this.uri_ = URI.createURI(file.getAbsolutePath());
-        init();
-    }
-
     public UMLModel(URI uri)
     {
-        this.uri_ = uri;
-        init();
-    }
-
-    public UMLModel(String uriPath)
-    {
-        if (uriPath == null)
+        if (uri == null)
             return;
-        this.uri_ = URI.createFileURI(uriPath);
+
+        this.uri_ = uri;
         init();
     }
 
@@ -68,7 +53,6 @@ public class UMLModel
             registerPathmaps(this.resourceSet_);
             this.resource_ = this.resourceSet_.getResource(this.uri_, true);
             this.resource_.load(null);
-            //EcoreUtil.resolveAll(this.resourceSet_);
         }
         catch (Exception e)
         {
