@@ -37,9 +37,9 @@ public class AMLReferenceModelImpl extends UMLModel implements AMLReferenceModel
 
     private ReferenceModel referenceModelPackage_ = null;
 
-    public AMLReferenceModelImpl(URI uri)
+    public AMLReferenceModelImpl(URI uri, boolean loadProfilesDynamically)
     {
-        super(uri);
+        super(uri, loadProfilesDynamically);
         populate();
     }
 

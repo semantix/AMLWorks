@@ -33,8 +33,10 @@ public class UMLModel
 
     protected URI uri_ = null;
 
-    private ResourceSet resourceSet_ = new ResourceSetImpl();
-    private Resource resource_ = null;
+    protected ResourceSet resourceSet_ = new ResourceSetImpl();
+    protected Resource resource_ = null;
+
+    protected boolean isLoadingProfileDynamically = false;
 
     public UMLModel(URI uri)
     {
@@ -45,7 +47,18 @@ public class UMLModel
         init();
     }
 
-    private void init()
+    public UMLModel(URI uri, boolean loadProfileDynamically)
+    {
+        if (uri == null)
+            return;
+
+        this.isLoadingProfileDynamically = loadProfileDynamically;
+
+        this.uri_ = uri;
+        init();
+    }
+
+    protected void init()
     {
         try
         {
@@ -81,7 +94,10 @@ public class UMLModel
             return null;
 
         if (this.resource_.getContents().isEmpty())
+        {
+            
             return null;
+        }
 
 
         EList<EObject> contents = this.resource_.getContents();
@@ -101,7 +117,7 @@ public class UMLModel
         return root;
     }
 
-    private void registerPathmaps(ResourceSet set)
+    protected void registerPathmaps(ResourceSet set)
     {
         String umlResourcePath = UMLResourcesUtil.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         try
@@ -146,16 +162,19 @@ public class UMLModel
         // It is important to register it with the model so that we can find out the
         // Profile and its application on the Reference Model.
         URI rmpPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_RMP_KEY));
-        URI rmpPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY));
+        URI rmpPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY, isLoadingProfileDynamically));
         set.getURIConverter().getURIMap().put(rmpPathMapURI, rmpPathURI);
+        logger_.warn("Registering....Profile for '" + AMLEnvironment.AML_RMP_KEY + "' :" + rmpPathURI);
 
         URI termPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_TP_KEY));
-        URI termPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY));
+        URI termPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY, isLoadingProfileDynamically));
         set.getURIConverter().getURIMap().put(termPathMapURI, termPathURI);
+        logger_.warn("Registering....Profile for '" + AMLEnvironment.AML_TP_KEY + "' :" + termPathURI);
 
         URI constPathMapURI = URI.createURI(AMLEnvironment.getProfileUriPathMap(AMLEnvironment.AML_CP_KEY));
-        URI constPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY));
+        URI constPathURI = URI.createURI(AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY, isLoadingProfileDynamically));
         set.getURIConverter().getURIMap().put(constPathMapURI, constPathURI);
+        logger_.warn("Registering....Profile for '" + AMLEnvironment.AML_CP_KEY + "' :" + constPathURI);
         //--------------------------------------------------------------------------------
 
         // Registering for "uml"

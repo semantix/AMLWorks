@@ -16,9 +16,9 @@ public class UMLModelTest extends TestCase
     public void testGetRootPackage() throws Exception
     {
         String rmPath = AMLEnvironment.getRMUriPath("cimi"); // AMLReferenceModelImpl
-        String rmpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY); // Reference UMLModel Profile
-        String tpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY);  // Terminology Profile
-        String cpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY);  // Constraint Profile
+        String rmpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY, true); // Reference UMLModel Profile
+        String tpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_TP_KEY, true);  // Terminology Profile
+        String cpPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_CP_KEY, true);  // Constraint Profile
 
         EObject rootPackage = testGetRootPackage(rmPath);
         assertNotNull(rootPackage);

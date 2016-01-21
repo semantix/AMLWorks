@@ -28,19 +28,48 @@ public class AMLResources
 
     private String currentRM_ = null;
 
-    public AMLResources(String rmName)
+    // If this is true, the AML Profiles are loaded from MDHT jar file
+    // from where static implementation of AML Profiles used
+    // Otherwise the Profiles are loaded from the UML files from
+    // a given location and its EMF model is created programmatically
+    // using define() method.
+    private boolean loadProfileDynamically = false;
+
+    public AMLResources(String rmName, boolean dynamicProfiles)
     {
-        // now we are loading it from MDHT_AML.jar
-        // initProfiles();
+        this.loadProfileDynamically = dynamicProfiles;
+
+        msg();
+
+        //if (loadProfileDynamically)
+        //    initProfiles();
 
         // Will try to load only the specified RM.
         initRMs(rmName);
     }
 
-    public AMLResources()
+    public boolean isLoadingProfileDynamically()
     {
+        return this.loadProfileDynamically;
+    }
+
+    public AMLResources(boolean dynamicProfiles)
+    {
+        this.loadProfileDynamically = dynamicProfiles;
+
+        msg();
+
+        //if (!loadProfileDynamically)
+        //    initProfiles();
+
         // will load all available RMs
         initRMs(null);
+    }
+
+    private void msg()
+    {
+        String mode = (this.loadProfileDynamically)? "Dynamic" : "Static";
+        logger_.warn("******** Loading AML Profiles from " + mode + " implementation ...  **********");
     }
 
     private AMLReferenceModel getAndPrintModel(String rmName)
@@ -52,7 +81,7 @@ public class AMLResources
         String rmUriPath = AMLEnvironment.getRMUriPath(rmName);
         URI rmUri = URI.createFileURI(rmUriPath);
 
-        AMLReferenceModel model = new AMLReferenceModelImpl(rmUri);
+        AMLReferenceModel model = new AMLReferenceModelImpl(rmUri, this.isLoadingProfileDynamically());
 
         currentRM_ = rmName;
 
@@ -64,8 +93,8 @@ public class AMLResources
         if (StringUtils.isEmpty(profileName))
             return null;
 
-        String uriPath = AMLEnvironment.getProfileUriPath(profileName);
-        AMLProfile amlProfile = new AMLProfile(URI.createFileURI(uriPath));
+        String uriPath = AMLEnvironment.getProfileUriPath(profileName, this.isLoadingProfileDynamically());
+        AMLProfile amlProfile = new AMLProfile(URI.createFileURI(uriPath), this.isLoadingProfileDynamically());
 
         if (print)
             AMLPrintUtils.printUMLProfile(amlProfile.getProfile());
@@ -75,13 +104,13 @@ public class AMLResources
 
     private void initProfiles()
     {
-        AMLProfile referenceModelProfile = getAndPrintProfile(AMLEnvironment.AML_RMP_KEY, true);
+        AMLProfile referenceModelProfile = getAndPrintProfile(AMLEnvironment.AML_RMP_KEY, false);
         rmp = referenceModelProfile.getProfile();
 
-        AMLProfile terminologyProfile = getAndPrintProfile(AMLEnvironment.AML_TP_KEY, true);
+        AMLProfile terminologyProfile = getAndPrintProfile(AMLEnvironment.AML_TP_KEY, false);
         tp = terminologyProfile.getProfile();
 
-        AMLProfile constraintProfile = getAndPrintProfile(AMLEnvironment.AML_CP_KEY, true);
+        AMLProfile constraintProfile = getAndPrintProfile(AMLEnvironment.AML_CP_KEY, false);
         cp = constraintProfile.getProfile();
     }
 

@@ -49,8 +49,8 @@ public class CreateAMLRM extends UMLModel
         Model amlRM = UMLModelHelper.createModel("AML_RM");
 
 
-        String rmpuriPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY);
-        AMLProfile rmpProfile = new AMLProfile(URI.createFileURI(rmpuriPath));
+        String rmpuriPath = AMLEnvironment.getProfileUriPath(AMLEnvironment.AML_RMP_KEY, true);
+        AMLProfile rmpProfile = new AMLProfile(URI.createFileURI(rmpuriPath), true);
 
         Profile rmp = rmpProfile.getProfile();
 

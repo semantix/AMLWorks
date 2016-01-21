@@ -92,14 +92,17 @@ public class AMLEnvironment
         return properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".pathMap");
     }
 
-    public static String getProfileUriPath(String profileName)
+    public static String getProfileUriPath(String profileName, boolean isDynamic)
     {
-        // Previously I was using it from the property files:
-        /*
-        String pref = StringUtils.isEmpty(getResourcesPathPrefix())? "" : (getResourcesPathPrefix() + File.separator);
-        return pref + properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
-        */
 
+        // If Dynamic loading of profile - then profile files are read from a location defined in properties file.
+        if (isDynamic)
+        {
+            String pref = StringUtils.isEmpty(getResourcesPathPrefix()) ? "" : (getResourcesPathPrefix() + File.separator);
+            return pref + properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
+        }
+
+        // If static implementation of AML profiles are used, then they are read from MDHT jar file
         String profileJarFilePath = ReferenceModel.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         try
         {
@@ -112,7 +115,7 @@ public class AMLEnvironment
 
         org.eclipse.emf.common.util.URI profileJarFileURI = org.eclipse.emf.common.util.URI.createURI("jar:file:" + profileJarFilePath + "!/");
 
-        String modelProfile = properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".path");
+        String modelProfile = properties_.getPropertyValue(AMLEnvironment.getProfileKey(profileName) + ".staticPath");
 
         return profileJarFileURI.appendSegment("model").appendSegment(modelProfile).toString();
     }

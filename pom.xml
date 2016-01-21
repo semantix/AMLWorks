@@ -225,22 +225,6 @@
             <scope>system</scope>
             <systemPath>${eclipse.p2.dir}/org.eclipse.emf.mapping.ecore2xml_2.9.0.v20150806-0404.jar</systemPath>
         </dependency>
-
-        <!--dependency>
-            <groupId>org.eclipse.equinox</groupId>
-            <artifactId>common</artifactId>
-            <version>3.7.0</version>
-            <scope>system</scope>
-            <systemPath>${eclipse.p2.dir}/org.eclipse.equinox.common_3.7.0.v20150402-1709.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.core</groupId>
-            <artifactId>resources</artifactId>
-            <version>3.10.0</version>
-            <scope>system</scope>
-            <systemPath>${eclipse.p2.dir}/org.eclipse.core.resources_3.10.1.v20150725-1910.jar</systemPath>
-        </dependency-->
-
     </dependencies>
 
     <!-- Repositories -->
